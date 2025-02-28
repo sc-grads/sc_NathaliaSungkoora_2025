@@ -1,22 +1,10 @@
+-- Read Operations( Selecting rows from table)
+		SELECT FirstName
+		FROM Employees;
 
--- Practicing various SELECT queries
-SELECT 
-      first_name AS [First Name]
-      ,last_name AS [Last Name]
-      ,phone Phone
-      ,email Email
-      ,street Street
-      ,city City
-      ,state State
-      
-  FROM sales.customers;
+		SELECT FirstName, Age, Department
+		FROM Employees;
 
-
-  SELECT brand_id
-      ,brand_name
-  FROM production.brands;
-
-  SELECT *
-  FROM production.brands;
-
- 
+		SELECT EmployeeID,FirstName, LastName, Age
+		FROM Employees
+		WHERE Age>30;

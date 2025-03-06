@@ -1,0 +1,32 @@
+name: SSMS Database Automation
+
+# The event that triggers the workflow
+on:
+  push:
+    # Only trigger when there are changes to .sql files in the specified folder
+    paths:
+      - 'DatabaseAdministration/SQLStatements/**/*.sql'  # This watches all SQL files in the folder
+    branches:
+      - main  # Only trigger on pushes to the 'main' branch
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Use your self-hosted runner (if set up)
+
+    steps:
+    # Step 1: Checkout repository to access SQL scripts
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Step 2: Execute SQL Scripts with Windows Authentication
+    - name: Execute SQL Scripts with Windows Authentication
+      shell: powershell
+      run: |
+        $server = "LAPTOP-JUKB3QVS" # Replace with your SQL Server name
+        
+        # Execute all SQL scripts in the specified folder
+        Get-ChildItem -Path "DatabaseAdministration/SQLStatements" -Filter "*.sql" | ForEach-Object {
+          Write-Host "Executing script: $($_.Name)..."
+          sqlcmd -S $server -E -i $_.FullName  # -E uses Windows Authentication
+        }
+        Write-Host "All SQL scripts executed successfully!"

@@ -8,4 +8,4 @@
 		SELECT EmployeeID,FirstName, LastName, Age
 		FROM Employees
 		WHERE Age>30;
---Creating comments in SQL scripts
+--Creating comments in SQL Select Script

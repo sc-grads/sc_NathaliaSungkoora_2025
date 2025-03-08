@@ -1,4 +1,4 @@
--- Test 19
+-- Test insert data into table
 USE AutoTest;
 GO
 

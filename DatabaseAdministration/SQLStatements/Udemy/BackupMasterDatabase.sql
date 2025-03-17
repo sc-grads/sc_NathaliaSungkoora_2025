@@ -1,0 +1,35 @@
+/*UDEMY COURSE_ MICROSOFT SQL SERVER DATABASE ADMINISTRATION COURSE
+PRACTICING DIFFERENT QUERIES AND STATEMENTS ON MASTER DATABASE BACKUP*/
+
+-- Backup the Master Database
+-- Creates a full backup of the 'master' database.
+BACKUP DATABASE [MASTER] TO DISK = N'C:\PROGRAM FILES\MICROSOFT SQL SERVER\MSSQL16.MSSQLSERVER\MSSQL\BACKUP\MASTER_BACKUP.BAK' 
+WITH NOFORMAT, NOINIT, NAME = N'MASTER-FULL DATABASE BACKUP', SKIP, NOREWIND, NOUNLOAD, STATS = 10
+GO
+
+-- Restore the Master Database
+-- Restores the 'master' database from the backup and replaces the existing one.
+RESTORE DATABASE MASTER FROM DISK = 'C:\PROGRAM FILES\MICROSOFT SQL SERVER\MSSQL16.MSSQLSERVER\MSSQL\BACKUP\MASTER_BACKUP.BAK' WITH REPLACE;
+GO
+
+-- Restart SQL Server in Single-User Mode
+-- Stops and starts SQL Server in single-user mode for maintenance tasks.
+NET STOP MSSQLSERVER
+GO
+NET START MSSQLSERVER /M
+GO
+
+-- Restore a Recovery Backup of Master Database
+-- Restores the 'master_recovery' database from a backup and moves files to new locations.
+RESTORE DATABASE MASTER_RECOVERY FROM DISK = 'C:\PROGRAM FILES\MICROSOFT SQL SERVER\MSSQL16.MSSQLSERVER\MSSQL\BACKUP\MASTER_BACKUP_TESTRESTORE.BAK' WITH
+MOVE 'MASTER' TO 'C:\MASTER_RECOVERY.MDF',
+MOVE 'MASTLOG' TO 'C:\MASTLOG_RECOVERY.LDF';
+GO
+
+-- Detach the Recovery Database
+-- Detaches the 'master_recovery' database after restore.
+USE [MASTER]
+GO
+EXEC MASTER.DBO.SP_DETACH_DB @DBNAME = N'MASTER_RECOVERY'
+GO
+

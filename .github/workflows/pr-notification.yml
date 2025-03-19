@@ -1,0 +1,35 @@
+name: PR Notification to MS Teams
+
+on:
+  pull_request:
+    types: [opened, reopened, closed]
+
+jobs:
+  notify_teams:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send PR notification to Teams
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_ACTION: ${{ github.event.action }}
+        run: |
+          MESSAGE="{
+            \"@type\": \"MessageCard\",
+            \"@context\": \"http://schema.org/extensions\",
+            \"themeColor\": \"0078D7\",
+            \"summary\": \"GitHub PR Notification\",
+            \"sections\": [{
+              \"activityTitle\": \"Pull Request: *$PR_TITLE*\",
+              \"activitySubtitle\": \"Action: *$PR_ACTION*\",
+              \"activityImage\": \"https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png\",
+              \"facts\": [
+                {\"name\": \"Author\", \"value\": \"$PR_AUTHOR\"},
+                {\"name\": \"PR Link\", \"value\": \"[View PR]($PR_URL)\"}
+              ],
+              \"markdown\": true
+            }]
+          }"
+          curl -H "Content-Type: application/json" -d "$MESSAGE" "$TEAMS_WEBHOOK_URL"

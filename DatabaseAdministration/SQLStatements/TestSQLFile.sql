@@ -3,7 +3,7 @@
 
 
 -- Create a table called "Employees"
-CREATE TABLE Employees (
+CREATE TABLE Employee (
     EmployeeID INT PRIMARY KEY,
     FirstName VARCHAR(50),
     LastName VARCHAR(50),

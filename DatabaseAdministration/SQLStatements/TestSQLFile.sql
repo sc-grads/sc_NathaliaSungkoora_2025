@@ -1,5 +1,5 @@
 
-/* SQL Test File Practice*/
+/* SQL Test File*/
 
 
 -- Create a table called "Employees"

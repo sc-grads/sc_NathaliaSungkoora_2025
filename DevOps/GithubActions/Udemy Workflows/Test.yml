@@ -1,0 +1,12 @@
+# Name of the workflow
+name: Test Project
+
+# Trigger the workflow when there is a push event to the repository
+on: 
+  push:  # This tells the workflow to run on push events
+
+jobs:
+  # Define the test job
+  test:
+    # The runner that the job will run on, in this case, the latest version of Ubuntu
+    r

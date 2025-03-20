@@ -1,0 +1,22 @@
+# Define the name of the workflow
+name: First Workflow
+
+# Specify the event that triggers this workflow
+# workflow_dispatch allows you to manually trigger this workflow from GitHub UI
+on: workflow_dispatch
+
+# Define the jobs to be run in the workflow
+jobs:
+  first-job:
+    # Specify the runner environment, in this case, using the latest version of Ubuntu
+    runs-on: ubuntu-latest
+    
+    # Define the steps for the job
+    steps:
+      # Step 1: Print a greeting message
+      - name: Print greeting
+        run: echo "Hello World!"
+      
+      # Step 2: Print a goodbye message after the greeting
+      - name: Print goodbye
+        run: echo "Done - bye!"

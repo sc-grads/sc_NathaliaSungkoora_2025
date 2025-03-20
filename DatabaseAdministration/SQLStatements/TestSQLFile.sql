@@ -1,9 +1,9 @@
 
-/* SQL Test File*/
+/* SQL Test File for Pull Requests*/
 
 
 -- Create a table called "Employees"
-CREATE TABLE Employees (
+CREATE TABLE Employee (
     EmployeeID INT PRIMARY KEY,
     FirstName VARCHAR(50),
     LastName VARCHAR(50),

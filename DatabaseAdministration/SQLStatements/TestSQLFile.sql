@@ -1,5 +1,5 @@
 
-/* SQL Test File for Pull Requests*/
+/* SQL Test File Used for Pull Requests Testing*/
 
 
 -- Create a table called "Employees"

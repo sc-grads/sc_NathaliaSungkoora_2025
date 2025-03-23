@@ -1,0 +1,67 @@
+# Name of the workflow
+name: Deployment Exercise 2
+
+# Trigger for the workflow: this workflow will run whenever there is a push to the repository
+on: push
+
+jobs:
+  # Job 1: Lint job
+  lint:
+    # The job runs on the latest version of Ubuntu (Linux)
+    runs-on: ubuntu-latest
+
+    # Steps for the lint job
+    steps:
+      # Step 1: Get the latest code from the repository
+      - name: Get code
+        uses: actions/checkout@v3  # This action fetches the code from the repo
+
+      # Step 2: Install project dependencies using npm
+      - name: Install dependencies
+        run: npm ci  # 'npm ci' installs dependencies from package-lock.json
+
+      # Step 3: Lint the code to check for style or code issues
+      - name: Lint
+        run: npm run lint  # Runs the linting command to check code quality
+
+  # Job 2: Test job, which depends on the successful completion of the 'lint' job
+  test:
+    needs: lint  # This job will only run after the 'lint' job is complete and successful
+    runs-on: ubuntu-latest
+
+    # Steps for the test job
+    steps:
+      # Step 1: Get the latest code from the repository
+      - name: Get code
+        uses: actions/checkout@v3  # This action fetches the code from the repo
+
+      # Step 2: Install project dependencies using npm
+      - name: Install dependencies
+        run: npm ci  # 'npm ci' installs dependencies from package-lock.json
+
+      # Step 3: Run tests to check if the code works as expected
+      - name: Test code
+        run: npm run test  # Runs the test command to ensure the code is correct
+
+  # Job 3: Deploy job, which depends on the successful completion of the 'test' job
+  deploy:
+    needs: test  # This job will only run after the 'test' job is complete and successful
+    runs-on: ubuntu-latest
+
+    # Steps for the deploy job
+    steps:
+      # Step 1: Get the latest code from the repository
+      - name: Get code
+        uses: actions/checkout@v3  # This action fetches the code from the repo
+
+      # Step 2: Install project dependencies using npm
+      - name: Install dependencies
+        run: npm ci  # 'npm ci' installs dependencies from package-lock.json
+
+      # Step 3: Build the project to prepare it for deployment
+      - name: Build code
+        run: npm run build  # Builds the code (e.g., compiles, bundles)
+
+      # Step 4: Deploy the code (this is just a placeholder)
+      - name: Deploy code
+        run: echo "Deploying..."  # In a real workflow, replace this with your deployment steps

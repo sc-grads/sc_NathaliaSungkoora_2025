@@ -1,0 +1,29 @@
+name: Matrix Demo  # Workflow name
+
+on: push  # Trigger workflow on push event
+
+jobs:  # Jobs to run in the workflow
+  build:  # Build job
+    continue-on-error: true  # Continue the job even if there are errors
+    strategy:  # Strategy for running matrix combinations
+      matrix:  # Define different combinations of node versions and operating systems
+        node-version: [12, 14, 16]  # Node versions to test
+        operating-system: [ubuntu-latest, windows-latest]  # OS versions to test
+        include:  # Include an additional combination
+          - node-version: 18  # Add Node 18 on Ubuntu
+            operating-system: ubuntu-latest
+        exclude:  # Exclude specific combination
+          - node-version: 12  # Exclude Node 12 on Windows
+            operating-system: windows-latest
+    runs-on: ${{ matrix.operating-system }}  # Runs on the OS defined in the matrix
+    steps:  # Steps for each job
+      - name: Get Code  # Checkout the code from the repository
+        uses: actions/checkout@v3
+      - name: Install NodeJS  # Set up NodeJS using the version from the matrix
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}  # Use the node version from the matrix
+      - name: Install Dependencies  # Install project dependencies
+        run: npm ci  # Clean install dependencies
+      - name: Build project  # Build the project
+        run: npm run build  # Run the build command

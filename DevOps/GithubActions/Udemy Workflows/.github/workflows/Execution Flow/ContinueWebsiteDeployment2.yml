@@ -1,0 +1,95 @@
+name: Contiue Website Deployment  # Workflow name
+
+on:  # Trigger on push to the main branch
+  push:
+    branches:
+      - main  # Trigger on main branch push
+
+jobs:  # Jobs to run in the workflow
+  lint:  # Lint job
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    steps:  # Steps for lint job
+      - name: Get code  # Checkout repo code
+        uses: actions/checkout@v3
+      - name: Cache dependencies  # Cache node_modules for faster future runs
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules  # Cache location
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}  # Cache key based on package-lock.json
+      - name: Install dependencies  # Install dependencies if cache is missed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Lint code  # Run linter on the codebase
+        run: npm run lint
+
+  test:  # Test job
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    steps:  # Steps for test job
+      - name: Get code  # Checkout repo code
+        uses: actions/checkout@v3
+      - name: Cache dependencies  # Cache node_modules to speed up future builds
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies  # Install dependencies if cache is missed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Test code  # Run tests
+        continue-on-error: true  # Continue even if tests fail
+        id: run-tests
+        run: npm run test
+      - name: Upload test report  # Upload test report if tests are run
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-report  # Name of the uploaded artifact
+          path: test.json  # Path to test report
+
+  build:  # Build job
+    needs: test  # Run after the test job is complete
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    steps:  # Steps for build job
+      - name: Get code  # Checkout repo code
+        uses: actions/checkout@v3
+      - name: Cache dependencies  # Cache node_modules to avoid reinstalling dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies  # Install dependencies if cache is missed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Build website  # Build the website (production files)
+        id: build-website
+        run: npm run build
+      - name: Upload artifacts  # Upload built files as artifacts for deployment
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-files  # Artifact name
+          path: dist  # Path to built files
+
+  deploy:  # Deployment job
+    needs: build  # Run after the build job completes
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    steps:  # Steps for deployment job
+      - name: Get build artifacts  # Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: dist-files  # Artifact name
+      - name: Output contents  # List the contents of the directory
+        run: ls
+      - name: Deploy  # Deployment command (replace with actual deployment steps)
+        run: echo "Deploying..."  # Placeholder for the deploy command
+
+  report:  # Report job for failure cases in lint or deploy jobs
+    needs: [lint, deploy]  # Run after lint or deploy fail
+    if: failure()  # Run only on failure
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    steps:  # Steps for report job
+      - name: Output information  # Output failure information
+        run: | 
+          echo "Something went wrong"
+          echo "${{ toJSON(github) }}"  # Show GitHub context for debugging

@@ -1,0 +1,53 @@
+# Name of the workflow
+name: Events Demo 1
+
+# Trigger for the workflow: this workflow will run on different types of GitHub events
+on:
+  pull_request:
+    types:
+      - opened  # Trigger the workflow when a pull request is opened
+    branches:
+      - main  # Run the workflow for the 'main' branch
+      - 'dev-*'  # Run the workflow for any branch starting with 'dev-' (e.g., dev-new, dev-this-is-new)
+      - 'feat/**'  # Run the workflow for any branch starting with 'feat/' (e.g., feat/new, feat/new/button)
+  
+  workflow_dispatch:  # This allows you to manually trigger the workflow from GitHub
+  push:
+    branches:
+      - main  # Run the workflow for the 'main' branch
+      - 'dev-*'  # Run the workflow for any branch starting with 'dev-'
+      - 'feat/**'  # Run the workflow for any branch starting with 'feat/'
+    paths-ignore:
+      - '.github/workflows/*'  # Ignore changes in workflow files from triggering the workflow
+
+jobs:
+  # Define a job named 'deploy'
+  deploy:
+    # The job will run on the latest version of Ubuntu (Linux)
+    runs-on: ubuntu-latest
+
+    # Steps for the 'deploy' job
+    steps:
+      # Step 1: Output event data to see information about the event that triggered the workflow
+      - name: Output event data
+        run: echo "${{ toJSON(github.event) }}"  # Prints out details about the event that triggered the workflow (like pull request, push, etc.)
+
+      # Step 2: Get the code from the repository
+      - name: Get code
+        uses: actions/checkout@v3  # This action fetches the code from the repository
+
+      # Step 3: Install the project dependencies using npm
+      - name: Install dependencies
+        run: npm ci  # 'npm ci' installs the exact dependencies defined in package-lock.json
+
+      # Step 4: Run tests to ensure the code works as expected
+      - name: Test code
+        run: npm run test  # Runs the tests to check if everything is functioning correctly
+
+      # Step 5: Build the project to prepare it for deployment
+      - name: Build code
+        run: npm run build  # This builds or compiles the project
+
+      # Step 6: Deploy the project (this is just a placeholder for the actual deployment step)
+      - name: Deploy project
+        run: echo "Deploying..."  # In a real deployment workflow, replace this with actual deployment commands

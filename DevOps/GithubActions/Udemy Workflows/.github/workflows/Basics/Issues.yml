@@ -1,0 +1,11 @@
+name: Handle issues  # Define the name of the GitHub Actions workflow
+on: 
+  issues:  # Trigger the workflow on issue events (such as opening, closing, etc.)
+  
+jobs:
+  output-info:  # Define the job named 'output-info' that will run
+    runs-on: ubuntu-latest  # The job will run on the latest version of the Ubuntu runner
+    
+    steps:
+      - name: Output event details  # Name the step that outputs the event details
+        run: echo "${{ toJSON(github.event) }}"  # Print the entire event object as a JSON string

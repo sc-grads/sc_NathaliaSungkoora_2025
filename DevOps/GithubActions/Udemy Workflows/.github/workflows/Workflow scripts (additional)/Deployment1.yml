@@ -1,0 +1,37 @@
+# Name of the workflow
+name: Deployment Exercise 1
+
+# Trigger for the workflow: this workflow will run whenever there is a push to the repository
+on: push
+
+jobs:
+  # Define a job named 'deploy' that handles the deployment process
+  deploy:
+    # The job runs on the latest version of Ubuntu (Linux)
+    runs-on: ubuntu-latest
+
+    # Steps for the 'deploy' job
+    steps:
+      # Step 1: Get the latest code from the repository
+      - name: Get code
+        uses: actions/checkout@v3  # This action fetches the code from the repo
+
+      # Step 2: Install the project dependencies using npm
+      - name: Install dependencies
+        run: npm ci  # 'npm ci' installs the dependencies from package-lock.json
+
+      # Step 3: Lint the code to check for any style or code issues
+      - name: Lint
+        run: npm run lint  # Runs a linting command to check code quality
+
+      # Step 4: Run tests to make sure the code works correctly
+      - name: Test code
+        run: npm run test  # Runs the tests to ensure the code is correct
+
+      # Step 5: Build the project, preparing it for deployment
+      - name: Build code
+        run: npm run build  # Builds the project (compiles code, etc.)
+
+      # Step 6: Deploy the code (this step is just a placeholder in this example)
+      - name: Deploy code
+        run: echo "Deploying..."  # In a real workflow, this would deploy your project

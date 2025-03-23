@@ -1,0 +1,55 @@
+name: Deploy Project
+
+# Triggers the workflow when there is a push event or manual workflow dispatch
+on: [push, workflow_dispatch]
+
+jobs:
+  test:
+    # This job runs on the latest version of Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      # Step to checkout the code from the repository
+      - name: Get code
+        uses: actions/checkout@v3
+
+      # Step to install Node.js (version 18 in this case)
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Step to install the project's dependencies using npm ci
+      - name: Install dependencies
+        run: npm ci
+
+      # Step to run the tests for the project
+      - name: Run tests
+        run: npm test
+
+  deploy:
+    # This job depends on the 'test' job being successful
+    needs: test
+    # This job also runs on the latest version of Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      # Step to checkout the code from the repository again for the deployment job
+      - name: Get code
+        uses: actions/checkout@v3
+
+      # Step to install Node.js (version 18 again)
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Step to install the project dependencies once again, as the deployment job is separate from the test job
+      - name: Install dependencies
+        run: npm ci
+
+      # Step to build the project before deployment (e.g., production build)
+      - name: Build project
+        run: npm run build
+
+      # Step to deploy the project (this is a placeholder; you'd replace this with your actual deployment command)
+      - name: Deploy
+        run: echo "Deploying ..."

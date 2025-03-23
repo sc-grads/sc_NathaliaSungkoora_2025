@@ -1,0 +1,49 @@
+name: Deployment  # Workflow name
+
+on:  # Trigger on push to these branches
+  push:
+    branches:
+      - main  # Trigger on main branch push
+      - dev   # Trigger on dev branch push
+
+env:  # Global environment variables
+  MONGODB_DB_NAME: gha-demo  # MongoDB database name
+
+jobs:  # Jobs to run in the workflow
+  test:  # Test job
+    environment: testing  # Set environment to testing
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    env:  # Job-specific environment variables
+      MONGODB_CLUSTER_ADDRESS: cluster0.ntrwp.mongodb.net  # MongoDB cluster
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}  # Secret MongoDB username
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}  # Secret MongoDB password
+      PORT: 8080  # Server port
+    steps:  # Steps to run in the test job
+      - name: Get Code  # Checkout repo code
+        uses: actions/checkout@v3
+      - name: Cache dependencies  # Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm  # Path to cache
+          key: npm-deps-${{ hashFiles('**/package-lock.json') }}  # Cache key
+      - name: Install dependencies  # Install npm dependencies
+        run: npm ci
+      - name: Run server  # Start server and wait for it
+        run: npm start & npx wait-on http://127.0.0.1:$PORT  # Ensure server is up
+      - name: Run tests  # Run tests
+        run: npm test
+      - name: Output information  # Output MongoDB username for debugging
+        run: |
+          echo "MONGODB_USERNAME: $MONGODB_USERNAME"
+
+  deploy:  # Deploy job
+    needs: test  # Run after the test job
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    steps:  # Steps for deployment
+      - name: Output information  # Output deployment info
+        env:
+          PORT: 3000  # Deployment port
+        run: |
+          echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
+          echo "MONGODB_USERNAME: $MONGODB_USERNAME"
+          echo "${{ env.PORT }}"

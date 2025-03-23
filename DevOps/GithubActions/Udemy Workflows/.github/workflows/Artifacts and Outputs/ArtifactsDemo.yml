@@ -1,0 +1,96 @@
+name: Deploy website
+
+# This workflow runs when there is a push to the 'main' branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # The 'test' job to run tests on the code before building
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code from the GitHub repository
+      - name: Get code
+        uses: actions/checkout@v3
+        
+      # Cache npm dependencies to speed up the process by reusing previous dependencies
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+          
+      # Install the dependencies defined in package-lock.json using npm ci
+      - name: Install dependencies
+        run: npm ci
+        
+      # Lint the code to ensure it follows coding standards and rules
+      - name: Lint code
+        run: npm run lint
+        
+      # Run tests on the code
+      - name: Test code
+        run: npm run test
+
+  # The 'build' job to build the website after tests are successful
+  build:
+    needs: test  # This job depends on the successful completion of the 'test' job
+    runs-on: ubuntu-latest
+    outputs:
+      script-file: ${{ steps.publish.outputs.script-file }}  # Output the filename of the JS script to deploy
+    steps:
+      # Checkout the code again
+      - name: Get code
+        uses: actions/checkout@v3
+        
+      # Cache npm dependencies again
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+          
+      # Install the dependencies
+      - name: Install dependencies
+        run: npm ci
+        
+      # Build the website (e.g., generates production files)
+      - name: Build website
+        run: npm run build
+        
+      # Capture the JS script filename to output for deployment
+      - name: Publish JS filename
+        id: publish
+        run: find dist/assets/*.js -type f -execdir echo 'script-file={}' >> $GITHUB_OUTPUT ';'
+        
+      # Upload the built files as artifacts to be used in the deploy job
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-files
+          path: dist
+
+  # The 'deploy' job to deploy the website
+  deploy:
+    needs: build  # This job depends on the successful completion of the 'build' job
+    runs-on: ubuntu-latest
+    steps:
+      # Download the build artifacts from the previous job
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-files
+          
+      # Output the list of contents in the working directory
+      - name: Output contents
+        run: ls
+        
+      # Output the filename of the JS script that was published earlier
+      - name: Output filename
+        run: echo "${{ needs.build.outputs.script-file }}"
+        
+      # Placeholder for the actual deployment step
+      - name: Deploy
+        run: echo "Deploying..." 

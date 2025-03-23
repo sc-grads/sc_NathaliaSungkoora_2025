@@ -1,0 +1,21 @@
+name: Label Issues (Script Injection Example)  # Define the name of the GitHub Actions workflow
+on:
+  issues:  # Trigger workflow when an issue event occurs
+    types:
+      - opened  # Only trigger when an issue is opened
+
+jobs:
+  assign-label:  # Define a job to assign a label
+    runs-on: ubuntu-latest  # Run the job on the latest Ubuntu runner
+    steps:
+      - name: Assign label  # Name of the step to assign a label
+        run: |  # Run a bash script in the step
+          issue_title="${{ github.event.issue.title }}"  # Get the title of the issue
+          echo "Issue title: $issue_title"  # Debugging: Print the issue title to verify it's correct
+          
+          # Check if the title contains the word "bug" (case-insensitive)
+          if [[ "${issue_title,,}" == *"bug"* ]]; then  
+            echo "Issue is about a bug!"  # Print this if the title contains "bug"
+          else
+            echo "Issue is not about a bug"  # Print this if the title doesn't contain "bug"
+          fi

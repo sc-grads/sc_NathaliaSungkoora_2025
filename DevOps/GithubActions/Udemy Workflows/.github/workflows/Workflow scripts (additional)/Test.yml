@@ -9,4 +9,17 @@ jobs:
   # Define the test job
   test:
     # The runner that the job will run on, in this case, the latest version of Ubuntu
-    r
+    runs-on: ubuntu-latest
+    steps: 
+      -name: Get code
+      uses: actions/checkout@V3
+      name: Install NodeJS
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+      -name: Install dependencies
+      run: npm ci
+      -name: Run tests
+      run: npm test
+
+

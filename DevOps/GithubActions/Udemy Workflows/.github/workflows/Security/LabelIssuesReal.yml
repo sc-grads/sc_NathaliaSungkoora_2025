@@ -1,0 +1,23 @@
+name: Label Issues (Permissions Example)  # Define the name of the GitHub Actions workflow
+on:
+  issues:  # Trigger workflow when an issue event occurs
+    types:
+      - opened  # Only trigger when an issue is opened
+
+jobs:
+  assign-label:  # Define a job to assign a label to the issue
+    permissions:  # Define permissions for the job
+      issues: write  # Grant write permission to issues, necessary to assign labels
+    runs-on: ubuntu-latest  # Run the job on the latest Ubuntu runner
+    steps:
+      - name: Assign label  # Name of the step for assigning a label
+        if: contains(github.event.issue.title, 'bug')  # Only run this step if the issue title contains the word "bug"
+        run: |  # Run a shell script to send a request to the GitHub API
+          curl -X POST \  # Use curl to send a POST request
+          --url https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels \  # Target the specific issue's labels endpoint
+          -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \  # Provide the GitHub token for authorization
+          -H 'content-type: application/json' \  # Set the content type to JSON
+          -d '{  # Specify the JSON data for the request
+              "labels": ["bug"]  # Add the "bug" label to the issue
+            }' \
+          --fail  # If the request fails, the workflow will stop and mark it as an error

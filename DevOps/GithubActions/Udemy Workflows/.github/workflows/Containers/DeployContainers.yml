@@ -1,0 +1,68 @@
+name: Deployment (Container)  # Define the name of the GitHub Actions workflow
+
+on:
+  push:  # Trigger the workflow when code is pushed to the specified branches
+    branches:
+      - main  # Trigger for pushes to the 'main' branch
+      - dev   # Trigger for pushes to the 'dev' branch
+
+env:  # Define environment variables to be used in the workflow
+  CACHE_KEY: node-deps  # Cache key for node dependencies
+  MONGODB_DB_NAME: gha-demo  # MongoDB database name
+
+jobs:
+  test:  # Define the 'test' job
+    environment: testing  # Set the environment for the job to 'testing'
+    runs-on: ubuntu-latest  # The job will run on the latest version of the Ubuntu runner
+    # container:  # Uncomment if you want to run the job inside a Docker container
+    #   image: node:16  # Use the official Node.js 16 Docker image
+    env:  # Define environment variables specific to the test job
+      MONGODB_CONNECTION_PROTOCOL: mongodb  # MongoDB connection protocol
+      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017  # MongoDB cluster address (localhost)
+      MONGODB_USERNAME: root  # MongoDB username for authentication
+      MONGODB_PASSWORD: example  # MongoDB password for authentication
+      PORT: 8080  # Port for the application to run
+
+    services:  # Define services that should be available during the job
+      mongodb:  # Set up a MongoDB service container
+        image: mongo  # Use the official MongoDB Docker image
+        ports:
+          - 27017:27017  # Expose MongoDB port
+        env:  # Set environment variables for the MongoDB service
+          MONGO_INITDB_ROOT_USERNAME: root  # Set the root username for MongoDB
+          MONGO_INITDB_ROOT_PASSWORD: example  # Set the root password for MongoDB
+
+    steps:  # Steps to be executed in the job
+      - name: Get Code  # Check out the repository code
+        uses: actions/checkout@v3  # Use the checkout action to get the repository's code
+
+      - name: Cache dependencies  # Cache npm dependencies to speed up future runs
+        uses: actions/cache@v3  # Use GitHub's caching action
+        with:
+          path: ~/.npm  # Cache the npm modules directory
+          key: ${{ env.CACHE_KEY }}-${{ hashFiles('**/package-lock.json') }}  # Cache key based on package-lock file
+
+      - name: Install dependencies  # Install the project dependencies
+        run: npm ci  # Run `npm ci` for a clean install of dependencies
+
+      - name: Run server  # Start the server in the background
+        run: npm start & npx wait-on http://127.0.0.1:$PORT  # Start the server and wait until it's available (requires MongoDB Atlas access)
+
+      - name: Run tests  # Run tests for the application
+        run: npm test  # Execute tests using npm
+
+      - name: Output information  # Output information to the logs
+        run: |
+          echo "MONGODB_USERNAME: $MONGODB_USERNAME"  # Output MongoDB username (used for connection)
+
+  deploy:  # Define the 'deploy' job
+    needs: test  # This job depends on the 'test' job and will run after it successfully completes
+    runs-on: ubuntu-latest  # The job will run on the latest version of the Ubuntu runner
+    steps:  # Steps to be executed in the deploy job
+      - name: Output information  # Output the environment variables to the logs
+        env:
+          PORT: 3000  # Define a specific port for the deployment job
+        run: |
+          echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"  # Output MongoDB database name
+          echo "MONGODB_USERNAME: $MONGODB_USERNAME"  # Output MongoDB username
+          echo "${{ env.PORT }}"  # Output the port the server will use for deployment

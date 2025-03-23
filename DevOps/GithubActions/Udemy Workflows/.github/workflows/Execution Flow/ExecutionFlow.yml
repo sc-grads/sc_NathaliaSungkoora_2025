@@ -1,0 +1,95 @@
+name: Website Deployment  # Workflow name
+
+on:  # Trigger on push to the main branch
+  push:
+    branches:
+      - main  # Trigger on main branch push
+
+jobs:  # Jobs to run in the workflow
+  lint:  # Lint job
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    steps:  # Steps for lint job
+      - name: Get code  # Checkout repo code
+        uses: actions/checkout@v3
+      - name: Cache dependencies  # Cache node_modules
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules  # Cache location
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}  # Cache key
+      - name: Install dependencies  # Install deps if cache is missed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Lint code  # Run linter
+        run: npm run lint
+
+  test:  # Test job
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    steps:  # Steps for test job
+      - name: Get code  # Checkout repo code
+        uses: actions/checkout@v3
+      - name: Cache dependencies  # Cache node_modules
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies  # Install deps if cache is missed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Test code  # Run tests
+        id: run-tests
+        run: npm run test
+      - name: Upload test report  # Upload report if tests fail
+        if: failure() && steps.run-tests.outcome == 'failure'
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report  # Report name
+          path: test.json  # Test report path
+
+  build:  # Build job
+    needs: test  # Run after tests pass
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    steps:  # Steps for build job
+      - name: Get code  # Checkout repo code
+        uses: actions/checkout@v3
+      - name: Cache dependencies  # Cache node_modules
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies  # Install deps if cache is missed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Build website  # Build website files
+        id: build-website
+        run: npm run build
+      - name: Upload artifacts  # Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-files  # Artifact name
+          path: dist  # Path to build files
+
+  deploy:  # Deployment job
+    needs: build  # Run after build job
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    steps:  # Steps for deployment
+      - name: Get build artifacts  # Download build files
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-files  # Artifact name
+      - name: Output contents  # List files in the directory
+        run: ls
+      - name: Deploy  # Placeholder for deployment command
+        run: echo "Deploying..."
+
+  report:  # Report job if failure occurs in lint or deploy
+    needs: [lint, deploy]  # Run after lint or deploy fail
+    if: failure()  # Run only on failure
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+    steps:  # Steps for report job
+      - name: Output information  # Output failure details
+        run: | 
+          echo "Something went wrong"
+          echo "${{ toJSON(github) }}"  # Show GitHub context

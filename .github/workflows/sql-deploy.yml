@@ -25,7 +25,7 @@ jobs:
         $server = "LAPTOP-JUKB3QVS" # Replace with your SQL Server name
         
         # Execute all SQL scripts in the specified folder
-        Get-ChildItem -Path "DatabaseAdministration/SQLStatements" -Filter "*.sql" | ForEach-Object {
+        Get-ChildItem -Path "DatabaseAdministration/SQLStatements/Database Automation Scripts" -Filter "*.sql" | ForEach-Object {
           Write-Host "Executing script: $($_.Name)..."
           sqlcmd -S $server -E -i $_.FullName  # -E uses Windows Authentication
         }

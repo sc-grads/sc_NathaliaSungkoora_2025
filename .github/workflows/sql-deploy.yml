@@ -5,7 +5,7 @@ on:
   push:
     # Only trigger when there are changes to .sql files in the specified folder
     paths:
-      - 'DatabaseAdministration/SQLStatements/**/*.sql'  # This watches all SQL files in the folder
+      - 'DatabaseAdministration/SQLStatements/Database Automation Scripts/**/*.sql'  # This watches all SQL files in the folder
     branches:
       - main  # Only trigger on pushes to the 'main' branch
 

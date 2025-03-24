@@ -1,4 +1,4 @@
---
+
 -- Check if the 'AutoTest' database exists; if not, create it.
 IF NOT EXISTS (SELECT name FROM sys.databases where name = 'AutoTest')
 BEGIN

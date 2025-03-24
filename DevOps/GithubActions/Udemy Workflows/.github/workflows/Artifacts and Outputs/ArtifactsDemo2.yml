@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -10,7 +11,7 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4  # Change to v4
         with:
           path: ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
@@ -20,6 +21,7 @@ jobs:
         run: npm run lint
       - name: Test code
         run: npm run test
+
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -29,7 +31,7 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4  # Change to v4
         with:
           path: ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
@@ -41,19 +43,17 @@ jobs:
         id: publish
         run: find dist/assets/*.js -type f -execdir echo 'script-file={}' >> $GITHUB_OUTPUT ';'
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # Change to v4
         with:
           name: dist-files
           path: dist
-          # path: |
-          #   dist
-          #   package.json
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Get build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4  # Change to v4
         with:
           name: dist-files
       - name: Output contents

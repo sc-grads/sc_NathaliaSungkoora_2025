@@ -5,4 +5,3 @@ BEGIN
 	CREATE DATABASE AutoTest;	-- Create the 'AutoTest' database
 END;
 GO
-

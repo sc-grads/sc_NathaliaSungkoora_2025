@@ -21,30 +21,43 @@ jobs:
           curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
           sudo apt-get update
           sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
-          echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
-          source ~/.bashrc
 
-      - name: 🚀 Execute SQL Scripts on Remote SQL Server with Detailed Logs
+      - name: 🧪 Debug Secret Status (safe logging)
         run: |
-          for file in "DatabaseAdministration/SQLStatements/Database Automation Scripts/"*.sql
-          do
+          echo "✅ DB_SERVER: ${{ secrets.DB_SERVER }}"
+          echo "✅ DB_USER: ${{ secrets.DB_USER }}"
+          echo "✅ DB_NAME: ${{ secrets.DB_NAME }}"
+          [ -z "${{ secrets.DB_PASS }}" ] && echo "❌ DB_PASS is missing!" || echo "✅ DB_PASS is set."
+
+      - name: ⚙️ Run SQL Scripts
+        run: |
+          run_sql() {
+            local file=$1
+            local db=$2
             echo "========================================"
-            echo "🚀 Executing SQL file: $file"
-            echo "----------------------------------------"
-            cat "$file"
+            echo "🚀 Executing SQL file: $file on database: $db"
             echo "----------------------------------------"
             /opt/mssql-tools/bin/sqlcmd \
               -S "${{ secrets.DB_SERVER }}" \
               -U "${{ secrets.DB_USER }}" \
               -P "${{ secrets.DB_PASS }}" \
-              -d "${{ secrets.DB_NAME }}" \
+              -d "$db" \
               -i "$file"
             if [ $? -eq 0 ]; then
-              echo "✅ Successfully executed: $file"
+              echo "✅ Success: $file"
             else
-              echo "❌ Failed to execute: $file"
+              echo "❌ Failed: $file"
               exit 1
             fi
             echo "========================================"
+          }
+
+          # Run the create DB script on master
+          run_sql "DatabaseAdministration/SQLStatements/Database Automation Scripts/01_create_database.sql" "master"
+
+          # Run remaining scripts on the new database
+          for file in "DatabaseAdministration/SQLStatements/Database Automation Scripts/"0[2-9]_*.sql
+          do
+            run_sql "$file" "${{ secrets.DB_NAME }}"
           done
         shell: bash

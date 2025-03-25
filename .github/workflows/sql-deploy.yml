@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install SQLCMD Tools
+      - name: 🛠️ Install SQLCMD Tools
         run: |
           curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
           curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
@@ -23,9 +23,10 @@ jobs:
           sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
           echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
           source ~/.bashrc
-      - name: Execute SQL Scripts on Remote SQL Server with Detailed Logs
+
+      - name: 🚀 Execute SQL Scripts on Remote SQL Server with Detailed Logs
         run: |
-          for file in 'DatabaseAdministration/SQLStatements/Database Automation Scripts/*.sql'
+          for file in "DatabaseAdministration/SQLStatements/Database Automation Scripts/"*.sql
           do
             echo "========================================"
             echo "🚀 Executing SQL file: $file"

@@ -3,7 +3,7 @@ name: SSMS Database Automation
 on:
   push:
     paths:
-      - 'DatabaseAdministration/SQLStatements/Database Automation Scripts/*.sql'  # Matches repo path
+      - 'DatabaseAdministration/SQLStatements/Database Automation Scripts/*.sql'  
     branches:
       - main
 

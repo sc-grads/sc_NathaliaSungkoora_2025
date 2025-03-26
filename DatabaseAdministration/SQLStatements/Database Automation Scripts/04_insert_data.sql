@@ -1,5 +1,6 @@
--- Test insert data into table
-USE AutoTest;
+
+-- Inserting data
+USE AutoDBNathalia;
 GO
 
 EXEC InsertUser 'John', 'Doe', 'john.doe@example.com';

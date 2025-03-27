@@ -1,7 +1,7 @@
 --Inserting data by creating a stored procedure
 
 -- 1. Set context to our database
-USE AutoDBNathalia;
+USE AutoTest_NS_27March;
 GO
 
 -- 2. Create or modify procedure to insert user data

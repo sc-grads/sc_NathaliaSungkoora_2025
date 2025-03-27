@@ -2,7 +2,7 @@
 -- Inserting data
 
 -- 1. Set context to our database
-USE AutoDBNathalia;
+USE AutoTest_NS_27March;
 GO
 
 -- 2. Execute the InsertUser procedure with sample data

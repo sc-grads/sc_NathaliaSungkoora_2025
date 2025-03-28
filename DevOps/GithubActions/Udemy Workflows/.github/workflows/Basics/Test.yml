@@ -1,0 +1,26 @@
+# Name of the workflow
+name: Test Project
+
+# Trigger the workflow when there is a push event to the repository
+on: 
+  push:  # This tells the workflow to run on push events
+
+jobs:
+  # Define the test job
+  test:
+    # The runner that the job will run on, in this case, the latest version of Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4  # Updated to v4
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v4  # Updated to v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test

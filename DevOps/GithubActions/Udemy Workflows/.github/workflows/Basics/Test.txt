@@ -1,0 +1,235 @@
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   sql-deploy.yml
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        ../../DevOps/GithubActions/Udemy Workflows/.github/workflows/Basics/Test.yml
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git add "sql-deploy.yml"
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git commit -m " Adding modified sql deploy yaml file"
+[main da24b40]  Adding modified sql deploy yaml file
+ 1 file changed, 39 insertions(+), 20 deletions(-)
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git push origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 1.07 KiB | 1.07 MiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote: Bypassed rule violations for refs/heads/main:
+remote:
+remote: - Changes must be made through a pull request.
+remote:
+remote:
+remote: GitHub found 1 vulnerability on sc-grads/sc_NathaliaSungkoora_2025's default branch (1 moderate). To find out more, visit:
+remote:      https://github.com/sc-grads/sc_NathaliaSungkoora_2025/security/dependabot/7
+remote:
+To https://github.com/sc-grads/sc_NathaliaSungkoora_2025.git
+   2f3f3c4..da24b40  main -> main
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   sql-deploy.yml
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        ../../DevOps/GithubActions/Udemy Workflows/.github/workflows/Basics/Test.yml
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git add "sql-deploy.yml"
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git commit -m "Modified pathway in sql deploy yaml file"
+[main c237513] Modified pathway in sql deploy yaml file
+ 1 file changed, 14 insertions(+), 5 deletions(-)
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git push origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 607 bytes | 607.00 KiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote: Bypassed rule violations for refs/heads/main:
+remote:
+remote: - Changes must be made through a pull request.
+remote:
+remote:
+remote: GitHub found 1 vulnerability on sc-grads/sc_NathaliaSungkoora_2025's default branch (1 moderate). To find out more, visit:
+remote:      https://github.com/sc-grads/sc_NathaliaSungkoora_2025/security/dependabot/7
+remote:
+To https://github.com/sc-grads/sc_NathaliaSungkoora_2025.git
+   da24b40..c237513  main -> main
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git add "sql-deploy.yml"
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git commit -m "Modified pathway in sql deploy yaml file"
+[main 5316c6d] Modified pathway in sql deploy yaml file
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git push origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 443 bytes | 443.00 KiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote: Bypassed rule violations for refs/heads/main:
+remote:
+remote: - Changes must be made through a pull request.
+remote:
+remote:
+remote: GitHub found 1 vulnerability on sc-grads/sc_NathaliaSungkoora_2025's default branch (1 moderate). To find out more, visit:
+remote:      https://github.com/sc-grads/sc_NathaliaSungkoora_2025/security/dependabot/7
+remote:
+To https://github.com/sc-grads/sc_NathaliaSungkoora_2025.git
+   c237513..5316c6d  main -> main
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git add "sql-deploy.yml"
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git commit -m "Modified pathway in sql deploy yaml file"
+[main e748cdb] Modified pathway in sql deploy yaml file
+ 1 file changed, 4 insertions(+), 15 deletions(-)
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git push origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 513 bytes | 513.00 KiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote: Bypassed rule violations for refs/heads/main:
+remote:
+remote: - Changes must be made through a pull request.
+remote:
+remote:
+remote: GitHub found 1 vulnerability on sc-grads/sc_NathaliaSungkoora_2025's default branch (1 moderate). To find out more, visit:
+remote:      https://github.com/sc-grads/sc_NathaliaSungkoora_2025/security/dependabot/7
+remote:
+To https://github.com/sc-grads/sc_NathaliaSungkoora_2025.git
+   5316c6d..e748cdb  main -> main
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   sql-deploy.yml
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        ../../DevOps/GithubActions/Udemy Workflows/.github/workflows/Basics/Test.yml
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git add "sql-deploy.yml"
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git commit -m "Modified pathway in sql deploy yaml file"
+[main 52a63c7] Modified pathway in sql deploy yaml file
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git push origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 499 bytes | 499.00 KiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote: Bypassed rule violations for refs/heads/main:
+remote:
+remote: - Changes must be made through a pull request.
+remote:
+remote:
+remote: GitHub found 1 vulnerability on sc-grads/sc_NathaliaSungkoora_2025's default branch (1 moderate). To find out more, visit:
+remote:      https://github.com/sc-grads/sc_NathaliaSungkoora_2025/security/dependabot/7
+remote:
+To https://github.com/sc-grads/sc_NathaliaSungkoora_2025.git
+   3f78403..52a63c7  main -> main
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   sql-deploy.yml
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        ../../DevOps/GithubActions/Udemy Workflows/.github/workflows/Basics/Test.yml
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git add "sql-deploy.yml"
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git commit -m "Modified sql deploy yaml file to accomodate changes"
+[main 8a0643b] Modified sql deploy yaml file to accomodate changes
+ 1 file changed, 24 insertions(+), 11 deletions(-)
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$ git push origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 838 bytes | 838.00 KiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote: Bypassed rule violations for refs/heads/main:
+remote:
+remote: - Changes must be made through a pull request.
+remote:
+remote:
+remote: GitHub found 1 vulnerability on sc-grads/sc_NathaliaSungkoora_2025's default branch (1 moderate). To find out more, visit:
+remote:      https://github.com/sc-grads/sc_NathaliaSungkoora_2025/security/dependabot/7
+remote:
+To https://github.com/sc-grads/sc_NathaliaSungkoora_2025.git
+   d28da73..8a0643b  main -> main
+
+NathaliaSungkoora@LAPTOP-JUKB3QVS MINGW64 /c/sc_NathaliaSungkoora_2025/.github/workflows (main)
+$

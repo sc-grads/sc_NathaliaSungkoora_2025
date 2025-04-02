@@ -23,7 +23,7 @@ jobs:
     environment: ${{ inputs.environment }}
 
     steps:
-      - name: 📅 Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
       - name: ⚙ Install SQLCMD + ODBC Driver
@@ -33,14 +33,14 @@ jobs:
           sudo apt-get update
           sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17 mssql-tools unixodbc-dev
 
-      - name: 🔢 Debug Secret Status
+      - name: 🧪 Debug Secret Status
         run: |
           echo "✅ DB_SERVER is set"
           echo "✅ DB_USER is set"
           echo "✅ DB_NAME is set"
           [ -z "${{ secrets.DB_PASS }}" ] && echo "❌ DB_PASS is missing!" || echo "✅ DB_PASS is set"
 
-      - name: ⚡ Run SQL Scripts
+      - name: ⚙ Run SQL Scripts
         shell: bash
         run: |
           set -e

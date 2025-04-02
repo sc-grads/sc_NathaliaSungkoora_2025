@@ -252,7 +252,7 @@ sudo dnf history                       # Shows a history of package transactions
 # ------------------------------------------------------------------------------
 
 # Package Management Commands
-# ----------------------------------------
+# ---------------------------------------
 
 # Update package list
 sudo apt update                  # Updates the package index to ensure you're installing the latest versions

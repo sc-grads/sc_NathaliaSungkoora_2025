@@ -3,29 +3,33 @@ name: SSMS Database Automation
 on:
   push:
     paths:
-      - 'DatabaseAdministration/SQLStatements/Database Automation Scripts/*.sql'
+      - "DatabaseAdministration/SQLStatements/Database Automation Scripts/*.sql"
     branches:
       - main
   workflow_dispatch:
-    
+
 jobs:
   deploy_to_development:
     name: Deploy to Development (Local) 🚧
-    uses: ./.github/workflows/sql-deployment-template.yml  
+    uses: ./.github/workflows/sql-deployment-template.yml
     with:
-      environment: 'development'
-      db_server: ${{ secrets.DB_SERVER }}
-      db_user: ${{ secrets.DB_USER }}
-      db_pass: ${{ secrets.DB_PASS }}
-      db_name: ${{ secrets.DB_NAME }}
+      environment: development
+    secrets:
+      DB_SERVER: ${{ secrets.DB_SERVER }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASS: ${{ secrets.DB_PASS }}
+      DB_NAME: ${{ secrets.DB_NAME }}
 
   deploy_to_production:
     name: Deploy to Production (Accountability Partner Machine) 🚀
     needs: deploy_to_development
-    uses: ./.github/workflows/sql-deployment-template.yml  
+    uses: ./.github/workflows/sql-deployment-template.yml
     with:
-      environment: 'production'
-      db_server: ${{ secrets.PROD_DB_SERVER }}
-      db_user: ${{ secrets.PROD_DB_USER }}
-      db_pass: ${{ secrets.PROD_DB_PASS }}
-      db_name: ${{ secrets.PROD_DB_NAME }}
+      environment: production
+    secrets:
+      DB_SERVER: ${{ secrets.PROD_DB_SERVER }}
+      DB_USER: ${{ secrets.PROD_DB_USER }}
+      DB_PASS: ${{ secrets.PROD_DB_PASS }}
+      DB_NAME: ${{ secrets.PROD_DB_NAME }}
+    concurrency: production
+

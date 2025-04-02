@@ -1,9 +1,45 @@
 #!/bin/bash
 
-
 # ------------------------------------------------------------------------------
 # Basic Linux Commands Cheat Sheet For Reference
 # ------------------------------------------------------------------------------
+
+
+
+# ------------------------------------------------------------------------------
+# Key Linux Directory Structure
+# ------------------------------------------------------------------------------
+
+# Root Directory ( / )
+/bin # Contains essential binary files (executables) like system programs.
+/etc #Configuration files for system and applications.
+/home #User home directories (e.g., /home/jason).
+/opt #Directory for optional/third-party software (e.g., /opt/google).
+/tmp #Temporary space, cleared at boot time.
+/usr #Contains user-related programs (e.g., /usr/bin for binaries).
+/var #Stores variable data, such as log files.
+
+# Additional Directories:
+  
+/boot #Contains files needed to start the OS (e.g., the Linux kernel).
+/media #Mount point for external devices like USB drives or CD-ROMs.
+/root #Home directory for the root user.
+/srv #Data served by the system, such as web files.
+
+# Application Directory Structures:
+  
+/usr/local #Non-system applications.
+/opt # Non-bundled software (e.g., /opt/avg for AVG antivirus).
+
+# General Application Install Locations:
+/opt/ or /usr/local/ #for company-specific software.
+
+
+
+# ------------------------------------------------------------------------------
+# Basic Linux Commands Continued
+# ------------------------------------------------------------------------------
+
 
 # Current directory
 pwd        # Shows current directory

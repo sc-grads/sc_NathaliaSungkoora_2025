@@ -6,18 +6,6 @@ on:
       environment:
         required: true
         type: string
-      db_server:
-        required: true
-        type: string
-      db_user:
-        required: true
-        type: string
-      db_pass:
-        required: true
-        type: string
-      db_name:
-        required: true
-        type: string
     secrets:
       DB_SERVER:
         required: true
@@ -33,42 +21,37 @@ jobs:
     name: Deploy to ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
+
     steps:
-      - name: 📥 Checkout repository
+      - name: 📅 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🗃 Cache SQLCMD Tools
-        id: cache-sqlcmd
-        uses: actions/cache@v3
-        with:
-          path: /opt/mssql-tools
-          key: ${{ runner.os }}-sqlcmd-${{ hashFiles('**/sql-deploy.yml') }}
-          restore-keys: ${{ runner.os }}-sqlcmd-
-
-      - name: 🛠 Install SQLCMD Tools
-        if: steps.cache-sqlcmd.outputs.cache-hit != 'true'
+      - name: ⚙ Install SQLCMD + ODBC Driver
         run: |
           curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
           curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
           sudo apt-get update
-          sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+          sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17 mssql-tools unixodbc-dev
 
-      - name: 🧪 Debug Secret Status
+      - name: 🔢 Debug Secret Status
         run: |
-          echo "✅ DB_SERVER: ${{ secrets.DB_SERVER }}"
-          echo "✅ DB_USER: ${{ secrets.DB_USER }}"
-          echo "✅ DB_NAME: ${{ secrets.DB_NAME }}"
-          [ -z "${{ secrets.DB_PASS }}" ] && echo "❌ DB_PASS is missing!" || echo "✅ DB_PASS is set."
+          echo "✅ DB_SERVER is set"
+          echo "✅ DB_USER is set"
+          echo "✅ DB_NAME is set"
+          [ -z "${{ secrets.DB_PASS }}" ] && echo "❌ DB_PASS is missing!" || echo "✅ DB_PASS is set"
 
-      - name: ⚙ Run SQL Scripts
+      - name: ⚡ Run SQL Scripts
+        shell: bash
         run: |
+          set -e
+          trap 'echo "🔥 Script failed on line $LINENO. Exiting..."; exit 1' ERR
+
           run_sql() {
             local file=$1
             local db=$2
             echo "========================================"
             echo "🚀 Executing $file on $db"
             echo "----------------------------------------"
-            # Try block
             if /opt/mssql-tools/bin/sqlcmd \
               -S "${{ secrets.DB_SERVER }}" \
               -U "${{ secrets.DB_USER }}" \
@@ -77,23 +60,20 @@ jobs:
               -i "$file"; then
               echo "✅ Successfully executed $file"
             else
-              # Catch block
               echo "❌ Error: Failed to execute $file"
-              echo "Check logs above for SQLCMD error details"
               exit 1
             fi
             echo "========================================"
           }
 
-          # Execute initial script
+          echo "⚙ Starting SQL Deployment"
+
           run_sql "DatabaseAdministration/SQLStatements/Database Automation Scripts/01_create_database_sp.sql" "master"
 
-          # Execute remaining scripts with error handling
-          for file in "DatabaseAdministration/SQLStatements/Database Automation Scripts/"0[2-9]_*.sql; do
+          for file in DatabaseAdministration/SQLStatements/0[2-9]_*.sql; do
             if [ -f "$file" ]; then
               run_sql "$file" "${{ secrets.DB_NAME }}"
             else
-              echo "⚠️ No scripts found matching pattern 0[2-9]_*.sql"
+              echo "⚠️ Skipping: No matching files found"
             fi
           done
-        shell: bash

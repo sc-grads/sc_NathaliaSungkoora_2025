@@ -32,4 +32,3 @@ jobs:
       DB_PASS: ${{ secrets.PROD_DB_PASS }}
       DB_NAME: ${{ secrets.PROD_DB_NAME }}
     concurrency: production
-

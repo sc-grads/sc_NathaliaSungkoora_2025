@@ -26,7 +26,7 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: ⚙ Install SQLCMD + ODBC Driver
+      - name: 🛠 Install SQLCMD + ODBC Driver
         run: |
           curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
           curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
@@ -70,7 +70,7 @@ jobs:
 
           run_sql "DatabaseAdministration/SQLStatements/Database Automation Scripts/01_create_database_sp.sql" "master"
 
-          for file in DatabaseAdministration/SQLStatements/0[2-9]_*.sql; do
+          for file in DatabaseAdministration/SQLStatements/Database Automation Scripts/"0[2-9]_*.sql; do
             if [ -f "$file" ]; then
               run_sql "$file" "${{ secrets.DB_NAME }}"
             else

@@ -1,5 +1,3 @@
-# .github/workflows/sql-deployment.yml
-
 name: SSMS Database Automation
 
 on:
@@ -8,7 +6,8 @@ on:
       - 'DatabaseAdministration/SQLStatements/Database Automation Scripts/*.sql'
     branches:
       - main
-
+  workflow_dispatch:
+    
 jobs:
   deploy_to_development:
     name: Deploy to Development (Local) 🚧

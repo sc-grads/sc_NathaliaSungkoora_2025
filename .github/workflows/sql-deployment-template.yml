@@ -70,7 +70,7 @@ jobs:
 
           run_sql "DatabaseAdministration/SQLStatements/Database Automation Scripts/01_create_database_sp.sql" "master"
 
-          for file in "DatabaseAdministration/SQLStatements/Database Automation Scripts/0[2-9]_*.sql"; do
+          for file in DatabaseAdministration/SQLStatements/Database\ Automation\ Scripts/0[2-9]_*.sql; do
             if [ -f "$file" ]; then
               run_sql "$file" "${{ secrets.DB_NAME }}"
             else

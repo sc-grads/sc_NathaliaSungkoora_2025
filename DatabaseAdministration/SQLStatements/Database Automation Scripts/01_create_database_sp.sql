@@ -10,10 +10,10 @@ CREATE OR ALTER PROCEDURE CreateAutoDatabase
 AS
 BEGIN
 	-- 3. Check if database 'AutoDBNathalia' exists
-    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'AutoDBNathalia')
+    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'AutoTest_NS_03April')
     BEGIN
 	-- 4. If it doesn't exist, create it
-        EXEC('CREATE DATABASE AutoDBNathalia');
+        EXEC('CREATE DATABASE AutoTest_NS_03April');
     END
 END;
 GO

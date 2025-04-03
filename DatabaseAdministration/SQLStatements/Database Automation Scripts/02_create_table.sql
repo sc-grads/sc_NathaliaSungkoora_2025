@@ -1,7 +1,7 @@
 -- Create Users Table in AutoDBNathalia
 
 -- 1. Switch to the AutoDBNathalia database
-USE AutoDBNathalia;
+USE AutoTest_NS_03April;
 GO
 
 -- 2. Check if 'users' table exists

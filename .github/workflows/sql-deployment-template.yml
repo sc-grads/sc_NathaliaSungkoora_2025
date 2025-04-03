@@ -19,7 +19,7 @@ on:
 jobs:
   deploy:
     name: Deploy to ${{ inputs.environment }}
-    runs-on: $server = "LAPTOP-JUKB3QVS"
+    runs-on: self-hosted
     environment: ${{ inputs.environment }}
 
     steps:

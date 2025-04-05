@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>AdventureWorksDataSource</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@ParamProductSubID">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:UserDefined>true</rd:UserDefined>
+          <rd:DbType>Int32</rd:DbType>
+          <rd:IsMultiValued>true</rd:IsMultiValued>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT Name AS [Product Name], 
+       ListPrice AS [List Price], 
+       SellStartDate AS [Sell Start Date], 
+       SellEndDate AS [Sell End Date],
+       ProductSubcategoryID
+FROM   Production.Product
+WHERE  ProductSubcategoryID IN (@ParamProductSubID)
+               OR (ProductSubcategoryID is null and 0 IN (@ParamProductSubID))
+
+ORDER BY [Product Name], [List Price]</CommandText>
+      <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+    </Query>
+    <Fields>
+      <Field Name="Product_Name">
+        <DataField>Product Name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="List_Price">
+        <DataField>List Price</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="Sell_Start_Date">
+        <DataField>Sell Start Date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="Sell_End_Date">
+        <DataField>Sell End Date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="ProductSubcategoryID">
+        <DataField>ProductSubcategoryID</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

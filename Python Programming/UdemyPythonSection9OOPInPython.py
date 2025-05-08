@@ -126,8 +126,65 @@
 #     print(combined_books.pages)  # Outputs: 440
 
 #--------------------------------------------------------------------------------------
-# __str__() & __repr__()
+# Dunder Method:__str__() & __repr__()
+
+# class Person:
+#     def __init__(self, name: str, age: int)->None:
+#         self.name = name
+#         self.age = age
+#     # This method easy to read for user
+#     def __str__(self)-> str:
+#         return f'{self.name}: {self.age} years old'
+#      # This method more technical (developer)
+#     def __repr__(self)-> str:
+#         return f'Person (name={self.name}, age={self.age})'
+
+# def main() -> None:
+#     mario: Person =Person('Mario', 27)
+#     print(mario)
+#     print(repr(mario))
+
+# if __name__ == '__main__':
+#     main()    
 
 
+#--------------------------------------------------------------------------------------
+# Dunder Method:__eq__() 
+
+# from typing import Self
+
+# # Car class with dunder method for comparison
+# class Car:
+#     # Initializer for the Car class
+#     def __init__(self, brand: str, car_id: int, colour: str) -> None:
+#         self.brand = brand  #Assigning to instances
+#         self.car_id = car_id
+#         self.color = colour
+
+#     # Dunder method for equality comparison
+#     def __eq__(self, other: Self) -> bool:
+#         # Comparing all attributes of the car using their dictionaries
+#         print('Current:', self.__dict__)
+#         print('Other:', other.__dict__)
+#         return self.__dict__ == other.__dict__
+
+# # Main block to test the Car class
+# if __name__ == '__main__':
+#     # Creating two car objects with the same properties
+#     car1 = Car('BMW', 1, 'Red')
+#     car2 = Car('BMW', 1, 'Red')
+
+#     # Comparing the two cars (should return True)
+#     print(car1 == car2)  #Output: True because all attributes are identical
+
+#     # Creating another car with different properties
+#     car3 = Car('BMW', 2, 'Blue')
+
+#     # Comparing different cars (should return False)
+#     print(car1 == car3)  # Output: False because car_id and color differ
+
+
+    
+    
 
 

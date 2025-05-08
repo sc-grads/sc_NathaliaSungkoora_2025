@@ -12,7 +12,7 @@
 # DATE TIME EXAMPLE 
 #Promotes usuability and makes it easier to reuse
 #from datetime import datetime
-import time
+#import time
 #def show_time():
     #now: datetime = datetime.now()
     #print(f'Time: {now:%H:%M:%S}')

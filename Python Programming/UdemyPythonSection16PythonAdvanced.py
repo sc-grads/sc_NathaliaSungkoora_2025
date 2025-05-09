@@ -4,10 +4,10 @@
 # MYPY
 
 # Incorrect type assignment
-var: str = 123  # This should be a string, but it's an integer.
+# var: str = 123  # This should be a string, but it's an integer.
 
-# List with wrong type
-items: list[str] = ["apple", "banana", True]  # Boolean is not a string.
+# # List with wrong type
+# items: list[str] = ["apple", "banana", True]  # Boolean is not a string.
 
 
 #---------------------------------------------------------------------------
@@ -187,38 +187,158 @@ items: list[str] = ["apple", "banana", True]  # Boolean is not a string.
 
 #DECORATORS
 
-import time
-from typing import Callable
-from functools import wraps
+# import time
+# from typing import Callable
+# from functools import wraps
 
-# Decorator to time a function
-def get_time(func: Callable) -> Callable:
-    """Times how long it takes to execute a function."""
+# # Decorator to time a function
+# def get_time(func: Callable) -> Callable:
+#     """Times how long it takes to execute a function."""
     
+#     @wraps(func)  # Properly using the wraps decorator
+#     def wrapper(*args, **kwargs) -> None:
+#         start_time: float = time.perf_counter()  # Record start time
+#         func(*args, **kwargs)  # Execute the function
+#         end_time: float = time.perf_counter()    # Record end time
+
+#         # Calculate and print the time taken
+#         print(f'Time: {end_time - start_time:.3f} s')
+    
+#     return wrapper
+
+# # Function to demonstrate the decorator
+# @get_time
+# def calculate():
+#     """Calculates() docstring"""
+#     print('Calculating...')
+#     for i in range(20_000_000):  # Simulate a time-consuming task
+#         pass  # or time.sleep(3)
+#     print("Done")
+
+# # Main entry point
+# def main() -> None:
+#     calculate()
+
+# if __name__ == '__main__':
+#     main()#---
+
+#---------------------------------------------------------------------------------------------
+
+#DECORATORS (CONTINUED)
+
+# from typing import Callable, Any
+# from functools import wraps
+
+# # Decorator factory to repeat function calls
+# def repeat(number: int) -> Callable:
+#     """Repeat a function call x amount of times."""
+    
+#     def decorator(func: Callable) -> Callable:
+#         @wraps(func)  # Preserve metadata
+#         def wrapper(*args, **kwargs) -> Any | None:
+#             value: Any =None
+#             for _ in range(number):
+#                 value = func(*args, **kwargs)  # Call the function
+#             return value  # Return the final value
+
+#         return wrapper
+
+#     return decorator
+
+# # Function to demonstrate the decorator
+# #@repeat(number=3)  # Repeat the function 3 times
+# #def greet(name: str) -> None:
+#     #"""A function used to greet people."""
+#     #print(f'Hello, {name}!')
+
+# # Main entry point
+# #def main() -> None:
+#     #greet('Bob')  # Should print the greeting 3 times 
+#                     #Output: Hello, Bob! (three times)
+
+#     # Using the decorator on a function that returns a value
+#     @repeat(2)
+#     def add(a: int, b: int) -> int:
+#         """A function used to add two numbers."""
+#         print(f'{a+b=}')
+#         return a + b
+
+#     # Testing the add function
+#     def main() -> None:
+#         result: int = add(1, 2)
+#         print(result)
+#         #output: a+b=3 (three times) and the result: 3
+
+#  # Checking if the function metadata is preserved
+#     print(add.__name__) #Output: add
+#     print(add.__doc__) #Output:A function used to add two numbers.
    
-    def wrapper(*args, **kwargs)->None:
-        start_time: float = time.perf_counter()  # Record start time
-        calculate() # Execute the function or func(*args, **kwargs)   
-        end_time: float = time.perf_counter()    # Record end time
 
-        # Calculate and print the time taken
+#     if __name__ == '__main__':
+#         main()
+
+
+#---------------------------------------------------------------------------------------------
+
+# ENUM
+
+from enum import Enum
+
+# # Defining an enum for device state
+# class State(Enum): #Represents device states
     
-        print(f'Time: {end_time- start_time:.3f} s')
-         
-    return wrapper
+#     OFF = 0
+#     ON = 1
 
-# Function to demonstrate the decorator
-@get_time
-def calculate():
-    """Calculates() docstring"""
-    print('Calculating...')
-    for i in range(20_000_000):  # Simulate a time-consuming task
-        pass
-    print("Done")
+# # Using the State enum (can change state here-affecting result)
+# state: State = State.OFF #Output=The device is turned off.
 
-# Main entry point
-def main() -> None:
-    calculate()
+# # Checking device state
+# if state == State.ON:
+#     print('The device is turned on.')
+# elif state == State.OFF:
+#     print('The device is turned off.')
+# else:
+#     print('Unknown input...')
 
-if __name__ == '__main__':
-    main()    
+#     #Output=The device is turned off.
+#-------------------------
+#ANOTHER EXAMPLE (1):
+# Defining another enum for colors
+# class Colour(Enum): # Represents color options
+   
+#     RED: str = 'R'
+#     GREEN: str ='G'
+#     BLUE: str ='B'
+
+# # Using the Color enum
+# red: Colour = Colour.RED
+# print(red)           #Output: Colour.RED
+# print(red.value)     #Output: R
+# print(red.name)      #Output: RED
+# print(Colour('R'))   #Output: Colour.RED
+
+# # ANOTHER EXAMPLE (2):
+# # Function that uses an enum parameter
+# def buy_car(brand: str, colour: Colour) -> None:
+#   #Buy a car with a specific colour.
+#     if colour == Colour.RED:
+#         print(f'You bought a smoking hot red {brand}.')
+#     elif colour == Colour.GREEN:
+#         print(f'You bought an eco-friendly green {brand}.')
+#     elif colour == Colour.BLUE:
+#         print(f'You bought a cool blue {brand}.')
+#     else:
+#         print('Unknown color.')
+
+# # Main entry point
+# def main() -> None:
+#     buy_car('BMW', Colour.BLUE)     #Output: You bought a cool blue BMW
+#     buy_car('Volvo', Colour.RED)    #Output: You bought a smoking hot red Volvo
+#     buy_car('Toyota', Colour.GREEN) #Output: You bought an eco-friendly green Toyota
+
+# if __name__ == '__main__':
+#     main()
+
+#---------------------------------------------------------------------------------------------
+

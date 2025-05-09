@@ -1,4 +1,4 @@
-#CHATBOT PROHECT (SECTION 4)
+#CHATBOT PROJECT (SECTION 4)
 
 import sys
 from datetime import datetime

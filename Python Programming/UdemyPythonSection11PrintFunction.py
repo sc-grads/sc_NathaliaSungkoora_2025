@@ -177,37 +177,114 @@
 #---------------------------------------------------
 #LOCALS 
 
-# Defining a function to demonstrate locals
-def add(a: int, b: int) -> None:
-    # Local variable inside the function
-    result = a + b
+# # Adding a global variable for demonstration
+# EXAMPLE: str = "Bob"
+# # Defining a function to demonstrate locals
+# def add(a: int, b: int) -> None:
+#     # Local variable inside the function
+#     result: int = a + b
 
-    # Printing the result
-    print(f"a + b = {result}")
 
-    # Printing the local variables within the function
-    print("Add has these locals:")
-    print(locals())
 
-# Calling the add function
-add(1, 1)
+#     # Printing the result
+#     print(f' {a} + {b} = {result}')
 
-# Adding a global variable for demonstration
-example: str = "Bob"
+#     # Printing the local variables within the function
+#     print('add() has:', locals())
+#     print('add() can see:', globals())   
+#     print(EXAMPLE)
+# # Calling the add function
+# add(1, 1)
+# #Output:  1 + 1 = 2
+#             #add() has: {'a': 1, 'b': 1, 'result': 2}
 
-# Calling the function again
-add(2, 3)
+#---------------------------------------------------
+# ALL (all())
 
-# Showing that the function can access globals
-def show_globals_in_function() -> None:
-    print("This function can see these globals:")
-    print(globals())
+# # Boolean variables (example values)
+# wifi_enabled: bool = True
+# has_electricity: bool =True
+# has_subscription: bool =True
 
-    # Accessing the global variable
-    print(f"Example from globals: {example}")
+# # Using all() to check connectivity
+# if wifi_enabled and has_subscription and has_electricity:
+#     print('Connected to the internet')
+#     #Output: Connected to the internet(for all conditions)
 
-# Calling the function to show globals
-show_globals_in_function()
+# # Better written code:
+# requirements: list[bool] = [wifi_enabled,has_electricity, has_subscription]
+# if all(requirements):
+#      print('Connected to the internet') 
+#    #Same Output(less code): Connected to the internet(for all conditions)
 
+
+# # Voting example
+# people_voted = [1, 1, 0, 1]  # 1 = voted, 0 = not voted
+
+# # Function to check voting status
+
+# if all(people_voted): #Opposite: if not all(people_voted
+#      print('Everyone voted')
+# else:
+#     print('Some people did not vote')
+# #output: Some people did not vote
+
+
+#---------------------------------------------------
+# ANY (any())
+#Checks if one element ina a list is at least true to pass a check
+
+
+# # Example Usage
+# people_voted = [0, 1, 0, 0, 0]  # 1 = voted, 0 = not voted
+
+# # Function to check if any person voted
+
+#     # Check if at least one person voted
+# if any(people_voted): #or write list here : if any([1,1,1,1])
+#     print('At least one person voted')
+# else:
+#     print('No one voted')
+
+# #output: At least one person voted
+#---------------------------------------------------
+# IS INSTANCE ( isinstance())
+#Used specifically to check data types
+#Checks if object is an instance of another object or sub-class of another object.
+
+# # Example variables
+# num: int = 42
+# pi: float = 3.14
+# text: str = 'Hello World'
+# my_list: list[int] = [1, 2, 3]
+
+# # Checking data types using isinstance
+# print(isinstance(num, int))  # Output: True
+# print(isinstance(num, str))  # Output: False
+# print(isinstance(num, float))  # Output: False
+
+# print(isinstance(pi, float))  # Output: True
+# print(isinstance(pi, int))  # Output: False
+
+# #Union to check if pi is integer or float
+# print(isinstance(pi, int | float))  # Output: True
+
+# print(isinstance(text, str))  # Output: True
+
+# print(isinstance(my_list, list))  # Output: True
+# print(isinstance(my_list, tuple))  # Output: False
+# #-------------
+# # Class and Subclass Example
+# class Animal:
+#     pass
+
+# class Cat(Animal):
+#     pass
+
+# # Checking subclass relationships
+# print(isinstance(Cat(), Animal))  # Output: True
+# print(isinstance(Animal(), Cat))  # Output: False (animal not subclass of cat)
+
+#---------------------------------------------------
 
 

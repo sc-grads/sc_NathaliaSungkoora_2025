@@ -140,5 +140,190 @@ ORDER BY D.DepartmentHead;
 
 
 
+----------------------------------------------------------------------------------------------
+--MISSING DATA
+
+--ALL rows that do not have acorresponding transaction (=NULL)
+-- Select employees with no transactions and sum of amounts (will be NULL)
+SELECT E.EmployeeNumber AS ENumber, E.EmployeeFirstName,
+       E.EmployeeLastName, T.EmployeeNumber AS TNumber, 
+       SUM(T.Amount) AS TotalAmount
+FROM tblEmployee AS E
+LEFT JOIN tblTransaction AS T
+ON E.EmployeeNumber = T.EmployeeNumber
+WHERE T.EmployeeNumber IS NULL  -- Employees with no matching transactions
+GROUP BY E.EmployeeNumber, T.EmployeeNumber, E.EmployeeFirstName,
+         E.EmployeeLastName
+ORDER BY E.EmployeeNumber, T.EmployeeNumber, E.EmployeeFirstName,
+         E.EmployeeLastName;
+
+--DERIVED TABLE: Wom't work because you can't use an ORDER BY
+SELECT *
+FROM (
+SELECT E.EmployeeNumber AS ENumber, E.EmployeeFirstName,
+       E.EmployeeLastName, T.EmployeeNumber AS TNumber, 
+       SUM(T.Amount) AS TotalAmount
+FROM tblEmployee AS E
+LEFT JOIN tblTransaction AS T
+ON E.EmployeeNumber = T.EmployeeNumber
+WHERE T.EmployeeNumber IS NULL  -- Employees with no matching transactions
+GROUP BY E.EmployeeNumber, T.EmployeeNumber, E.EmployeeFirstName,
+         E.EmployeeLastName
+ORDER BY E.EmployeeNumber, T.EmployeeNumber, E.EmployeeFirstName,
+         E.EmployeeLastName) AS newTable; --Output: ERROR
+--LEFT JOIN: 
+--Solution change ORDER BY to outside of () and change names:
+SELECT *
+FROM (
+SELECT E.EmployeeNumber AS ENumber, E.EmployeeFirstName,
+       E.EmployeeLastName, T.EmployeeNumber AS TNumber, 
+       SUM(T.Amount) AS TotalAmount
+FROM tblEmployee AS E
+LEFT JOIN tblTransaction AS T
+ON E.EmployeeNumber = T.EmployeeNumber
+GROUP BY E.EmployeeNumber, T.EmployeeNumber, E.EmployeeFirstName,
+         E.EmployeeLastName) AS newTable
+WHERE TNumber IS NULL  -- Employees with no matching transactions (outside of query)
+ORDER BY ENumber, TNumber, EmployeeFirstName,
+         EmployeeLastName; --Output: 7 rows All employees who have no transactions
+
+-- RIGHT JOIN to find transactions without matching employees
+SELECT *
+FROM (
+    SELECT E.EmployeeNumber AS ENumber, E.EmployeeFirstName,
+           E.EmployeeLastName, T.EmployeeNumber AS TNumber, 
+           SUM(T.Amount) AS TotalAmount
+    FROM tblEmployee AS E
+    RIGHT JOIN tblTransaction AS T
+    ON E.EmployeeNumber = T.EmployeeNumber
+    GROUP BY E.EmployeeNumber, T.EmployeeNumber, E.EmployeeFirstName,
+             E.EmployeeLastName
+) AS newTable
+WHERE ENumber IS NULL  -- Transactions with no matching employee
+ORDER BY ENumber, TNumber, EmployeeFirstName,
+         EmployeeLastName;
+
+----------------------------------------------------------------------------------------------
+--DELETING DATA
+
+SELECT COUNT(*)
+FROM tblTransaction;
+
+--USING DELETE COMMAND:
+
+BEGIN TRANSACTION
+
+SELECT COUNT(*)
+FROM tblTransaction
+
+DELETE tblTransaction
+FROM tblEmployee AS E
+RIGHT JOIN tblTransaction AS T
+ON E.EmployeeNumber = T.EmployeeNumber
+WHERE E.EmployeeNumber IS NULL --Transaction with no matching employee
+
+SELECT COUNT(*)
+FROM tblTransaction
+
+ROLLBACK TRANSACTION 
+
+--Building  DELETE Statement USING IN CLAUSE:
+BEGIN TRANSACTION
+SELECT COUNT(*)
+FROM tblTransaction
+
+DELETE tblTransaction
+FROM tblTransaction
+WHERE EmployeeNumber IN(
+SELECT TNumber
+FROM (
+    SELECT E.EmployeeNumber AS ENumber, E.EmployeeFirstName,
+           E.EmployeeLastName, T.EmployeeNumber AS TNumber, 
+           SUM(T.Amount) AS TotalAmount
+    FROM tblEmployee AS E
+    RIGHT JOIN tblTransaction AS T
+    ON E.EmployeeNumber = T.EmployeeNumber
+    GROUP BY E.EmployeeNumber, T.EmployeeNumber, E.EmployeeFirstName,
+             E.EmployeeLastName
+) AS newTable
+WHERE ENumber IS NULL  -- Transactions with no matching employee
+);
+
+SELECT COUNT(*)
+FROM tblTransaction
+ROLLBACK TRAN 
+
+----------------------------------------------------------------------------------------------
+--UPDATING DATA
+ 
+SELECT * FROM tblEmployee WHERE EmployeeNumber = 194 --employee 194 details
+SELECT * FROM tblTransaction WHERE EmployeeNumber = 3  -- employee 3 (shows transactions)
+SELECT * FROM tblTransaction WHERE EmployeeNumber = 194  --employee 194  (shows transactions)
+
+
+
+BEGIN TRAN  
+SELECT * FROM tblTransaction 
+WHERE EmployeeNumber = 194  
+
+UPDATE tblTransaction  
+SET EmployeeNumber = 194   
+WHERE EmployeeNumber = 3 --change from 3 to 194
+				--BETWEEN 3 and 10 
+				--IN IN (3, 5, 7, 9) 
+
+SELECT * FROM tblTransaction 
+WHERE EmployeeNumber = 194  
+
+ROLLBACK TRAN  
+------------------------------------------------------
+
+--Another example Using IN:
+
+BEGIN TRAN  
+SELECT * FROM tblTransaction 
+WHERE EmployeeNumber = 194  
+
+UPDATE tblTransaction  
+SET EmployeeNumber = 194   
+WHERE EmployeeNumber IN (3, 5, 7, 9)  --FROM 0 to ten as output
+
+SELECT * FROM tblTransaction 
+WHERE EmployeeNumber = 194  
+
+ROLLBACK TRAN  
+
+
+
+
+--USING OUTPUT and INSERTED
+-- Show old and new values of TRANSACTIONS
+
+BEGIN TRAN --REMOVE SELECT BELOW THIS
+
+UPDATE tblTransaction  
+SET EmployeeNumber = 194  
+OUTPUT INSERTED.EmployeeNumber, DELETED.EmployeeNumber --old rows go into deleted; new rows go into inserted
+FROM tblTransaction  
+WHERE EmployeeNumber IN (3, 5, 7, 9)  
+
+ROLLBACK TRAN  
+------------------------------------------------------------------------------------------------------------------------
+
+-- Delete TRANSACTIONS by employee 3  
+DELETE tblTransaction  
+FROM tblTransaction  
+WHERE EmployeeNumber = 3  
+
+-- (Commented out) Check TRANSACTIONS again by 194  
+-- SELECT * FROM tblTransaction WHERE EmployeeNumber = 194  
+
+-- Cancel all changes made in this TRANSACTION  
+ROLLBACK TRAN  
+
+
+
+
+
 
 

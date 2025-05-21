@@ -249,3 +249,99 @@ DROP TABLE tblIsNull
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --MERGE STATEMENT
+
+MERGE INTO tblTransaction AS T
+
+
+BEGIN TRAN 
+
+MERGE INTO tblTransaction AS T 
+USING tblTransactionNew AS S    --USING to MERGE
+ON T.EmployeeNumber = S.EmployeeNumber AND T.DateOfTransaction = S.DateOfTransaction  -- Merging by more than one column
+   
+
+WHEN MATCHED THEN  -- If a matching row is found in tblTransaction
+    UPDATE SET Amount = T.Amount + S.Amount  -- Add the new Amount to the existing Amount
+
+WHEN NOT MATCHED BY TARGET THEN  -- If no matching row exists in tblTransaction
+    INSERT ([Amount], [DateOfTransaction], [EmployeeNumber])  -- Insert a new row with these columns
+    VALUES (S.Amount, S.DateOfTransaction, S.EmployeeNumber);
+
+ROLLBACK TRAN  -- Undo all changes (for testing or safety; remove to commit changes)
+
+-- Notes:
+-- tblTransactionNew has new data, tblTransaction is the target
+-- One row in tblTransaction can match one row in tblTransactionNew
+-- One row in tblTransaction can also match multiple rows in tblTransactionNew (amounts will be summed)
+
+----------------------------------------
+USE [70-461(2)];
+SELECT EmployeeNumber, DateOfTransaction, COUNT(*) AS NumberOfRows
+FROM tblTransactionNew
+GROUP BY EmployeeNumber, DateOfTransaction
+HAVING COUNT(*)>1;
+
+SELECT EmployeeNumber, DateOfTransaction, SUM(Amount) AS TotalAmount
+FROM tblTransactionNew
+GROUP BY EmployeeNumber, DateOfTransaction
+
+----------------------------------------
+--MODIFYING MERGE STATEMENT 
+--Including the SELECT STATEMENT:
+
+BEGIN TRAN 
+MERGE INTO tblTransaction AS T 
+USING (
+	SELECT EmployeeNumber, DateOfTransaction,
+	SUM(Amount) AS Amount
+	FROM tblTransactionNew
+	GROUP BY EmployeeNumber, DateOfTransaction) AS S
+
+ON T.EmployeeNumber = S.EmployeeNumber 
+AND T.DateOfTransaction = S.DateOfTransaction 
+   
+WHEN MATCHED THEN 
+    UPDATE SET Amount = T.Amount + S.Amount  
+
+WHEN NOT MATCHED BY TARGET THEN 
+    INSERT ([Amount], [DateOfTransaction], [EmployeeNumber]) 
+    VALUES (S.Amount, S.DateOfTransaction, S.EmployeeNumber)
+	
+OUTPUT INSERTED.*, DELETED.*; --See what happens internally without querying
+ROLLBACK TRAN
+
+
+-----------------
+--MERGE WITH ADDITIONAL COLUMNS
+
+BEGIN TRAN 
+ALTER TABLE tblTransaction
+ADD Comments varchar(50) NULL
+GO --Data Definitionn Language
+
+MERGE INTO tblTransaction AS T 
+USING (
+	SELECT EmployeeNumber, DateOfTransaction,
+	SUM(Amount) AS Amount
+	FROM tblTransactionNew
+	GROUP BY EmployeeNumber, DateOfTransaction) AS S
+
+ON T.EmployeeNumber = S.EmployeeNumber 
+AND T.DateOfTransaction = S.DateOfTransaction 
+   
+WHEN MATCHED THEN  --add AND to put another one
+    UPDATE SET Amount = T.Amount + S.Amount, Comments = 'Updated Row'  
+
+WHEN NOT MATCHED BY TARGET THEN 
+	INSERT ([Amount], [DateOfTransaction], [EmployeeNumber], Comments)
+	VALUES (S.Amount, S.DateOfTransaction, S.EmployeeNumber, 'Inserted Row')
+	
+WHEN NOT MATCHED BY SOURCE THEN --Add not matched by source
+	UPDATE SET Comments = 'Unchanged'
+
+OUTPUT INSERTED.*, DELETED.*, $action; --Tells you action done (optional)
+--SELECT * FROM tblTransaction ORDER BY EmployeeNumber, DateOfTransaction --Include Order by
+ROLLBACK TRAN
+
+
+

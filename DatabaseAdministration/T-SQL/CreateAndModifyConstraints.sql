@@ -234,3 +234,115 @@ DROP CONSTRAINT chkAmount
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --PRIMARY KEY 
+
+-- Add a PRIMARY KEY constraint on EmployeeNumber  
+ALTER TABLE tblEmployee  
+ADD CONSTRAINT PK_tblEmployee PRIMARY KEY (EmployeeNumber)  
+
+-- Insert a new employee with EmployeeNumber 2004  
+INSERT INTO tblEmployee(EmployeeNumber, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName,  
+EmployeeGovernmentID, DateOfBirth, Department)  
+VALUES (2004, 'FirstName', 'MiddleName', 'LastName', 'AB12345FI', '2014-01-01', 'Accounts')  
+
+-- Delete the employee with EmployeeNumber 2004  
+DELETE FROM tblEmployee  
+WHERE EmployeeNumber = 132/131/2004
+
+-- Drop the PRIMARY KEY constraint  
+ALTER TABLE tblEmployee  
+DROP CONSTRAINT PK_tblEmployee  
+-----------------------------------------------------
+--CREATE NEW TABLE USING IDENTITY:
+-- Create a new table with an IDENTITY column and PRIMARY KEY  
+CREATE TABLE tblEmployee3 
+(  
+    EmployeeNumber INT CONSTRAINT PK_tblEmployee3 PRIMARY KEY IDENTITY(1,1),  
+    EmployeeName NVARCHAR(20)  
+)  
+
+-- Insert duplicate names (allowed since EmployeeNumber auto-increments)  
+INSERT INTO tblEmployee3 
+VALUES ('My Name'),  
+       ('My Name')  
+
+-- View all rows to see if values were added:
+SELECT * FROM tblEmployee3
+
+-- Delete all rows from the table (keeps identity seed value unchanged)  
+DELETE FROM tblEmployee3
+
+-- Truncate the table (resets identity seed to 1)  
+TRUNCATE TABLE tblEmployee3 
+
+-- Insert values with explicit EmployeeNumber (will fail without IDENTITY_INSERT ON)  
+INSERT INTO tblEmployee3(EmployeeNumber, EmployeeName)  
+VALUES (3, 'My Name'), (4, 'My Name')  --Output: ERROR Identity needs to be set to ON
+
+-- Allow inserting explicit values into IDENTITY column  
+SET IDENTITY_INSERT tblEmployee3  ON  
+
+-- Insert rows with custom EmployeeNumber values  
+INSERT INTO tblEmployee3(EmployeeNumber, EmployeeName)  
+VALUES (38, 'My Name'), (39, 'My Name')  
+
+-- Turn off IDENTITY_INSERT again  
+SET IDENTITY_INSERT tblEmployee3  OFF
+
+-- Drop the test table  
+DROP TABLE tblEmployee3
+
+-- Get the last identity value generated on the current session and any table  
+SELECT @@IDENTITY  --Output: 39 (last)
+
+-- Get the last identity value generated in the current scope  
+SELECT SCOPE_IDENTITY()  --Output: 39 (last)
+
+-- Get the current identity value for a specific table  
+SELECT IDENT_CURRENT('dbo.tblEmployee3') 
+
+-- Create a new table with IDENTITY and PRIMARY KEY  
+CREATE TABLE tblEmployee4
+(  
+    EmployeeNumber INT CONSTRAINT PK_tblEmployee4  PRIMARY KEY IDENTITY(1,1),  
+    EmployeeName NVARCHAR(20)  
+)  
+
+-- Insert two rows into the new table  
+INSERT INTO tblEmployee4
+VALUES ('My Name'),  
+       ('My Name')  
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--FOREIGN
+
+BEGIN TRAN  
+
+-- Make EmployeeNumber null in  TRANSACTIONS  
+ALTER TABLE tblTransaction  
+ALTER COLUMN EmployeeNumber INT NULL  
+
+-- Set default EmployeeNumber to 124 in TRANSACTIONS  
+ALTER TABLE tblTransaction  
+ADD CONSTRAINT DF_tblTransaction DEFAULT 124 FOR EmployeeNumber  
+
+-- Add FOREIGN KEY to TRANSACTIONS (no check, update cascade, delete set default)  
+ALTER TABLE tblTransaction WITH NOCHECK  
+ADD CONSTRAINT FK_tblTransaction_EmployeeNumber FOREIGN KEY (EmployeeNumber)  
+REFERENCES tblEmployee(EmployeeNumber)  
+ON UPDATE CASCADE  
+ON DELETE SET DEFAULT  
+
+-- DELETE employee 123; related TRANSACTIONS will use default (124)  
+DELETE tblEmployee WHERE EmployeeNumber = 123  
+
+-- View TRANSACTIONS with specific amounts  
+SELECT E.EmployeeNumber, T.*  
+FROM tblEmployee AS E  
+RIGHT JOIN tblTransaction AS T  
+ON E.EmployeeNumber = T.EmployeeNumber  
+WHERE T.Amount IN (-179.47, 786.22, -967.36, 957.03)  
+
+ROLLBACK TRAN  

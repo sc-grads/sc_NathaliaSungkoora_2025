@@ -55,7 +55,7 @@ ORDER BY EmployeeNumber; -- must be in tblTransaction, and not 126-129
                          -- LEFT JOIN
                         
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
----ANY, SOME and ALL
+--ANY, SOME and ALL
 
 SELECT * 
 FROM tblTransaction AS T
@@ -95,6 +95,7 @@ ORDER BY EmployeeNumber;
 -> ALL = anything up to 126
 							*/
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --THE FROM CLAUSE
 
 -- Subquery in FROM clause, filter employees first, then join
@@ -125,3 +126,72 @@ LEFT JOIN tblEmployee AS E
 ON E.EmployeeNumber = T.EmployeeNumber
 AND E.EmployeeLastName LIKE 'y%'
 ORDER BY T.EmployeeNumber;
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--THE SELECT CLAUSE
+
+-- COUNT transactions per employee
+--EXAMPLE of a CORRELATED QUERY:
+SELECT *, 
+    (SELECT COUNT(EmployeeNumber)
+     FROM tblTransaction AS T
+     WHERE T.EmployeeNumber = E.EmployeeNumber) AS NumTransactions 
+FROM tblEmployee AS E
+WHERE E.EmployeeLastName LIKE 'y%'  
+
+
+
+
+--Adding another subquery and SEPERATE using a COMMA
+SELECT *, 
+    (SELECT COUNT(EmployeeNumber)
+     FROM tblTransaction AS T
+     WHERE T.EmployeeNumber = E.EmployeeNumber) AS NumTransactions, -- COUNT transactions per employee
+
+    (SELECT SUM(Amount)
+     FROM tblTransaction AS T
+     WHERE T.EmployeeNumber = E.EmployeeNumber) AS TotalAmount       -- TOTAL AMOUNT per employee
+
+FROM tblEmployee AS E
+WHERE E.EmployeeLastName LIKE 'y%'  -- only employees with last names starting with 'y'
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--CORRELATED SUBQUERY -WHERE
+
+-- Returns transactions where a matching employee EXISTS and last name starts with 'y'
+SELECT * 
+FROM tblTransaction AS T
+WHERE EXISTS ( --runs for every row in outer query checks name then number
+    SELECT EmployeeNumber 
+    FROM tblEmployee AS E 
+    WHERE EmployeeLastName LIKE 'y%' AND T.EmployeeNumber = E.EmployeeNumber
+)									--Don't need JOIN, using AND
+ORDER BY EmployeeNumber
+
+-- NOT EXISTS (OPPOSITE): Returns transactions where no matching employee has a last name starting with 'y'
+SELECT * 
+FROM tblTransaction AS T
+WHERE NOT EXISTS (
+    SELECT EmployeeNumber 
+    FROM tblEmployee AS E 
+    WHERE EmployeeLastName LIKE 'y%' AND T.EmployeeNumber = E.EmployeeNumber
+)
+ORDER BY EmployeeNumber
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--TOP 5 FROM VARIOUS CATEGORIES
+
+--USING RANK:
+-- Get top 5 employees (by EmployeeNumber) from each department
+SELECT * 
+FROM (
+    SELECT D.Department, EmployeeNumber, EmployeeFirstName, EmployeeLastName,
+           RANK() OVER(PARTITION BY D.Department ORDER BY E.EmployeeNumber) AS TheRank
+    FROM tblDepartment AS D 
+    JOIN tblEmployee AS E ON D.Department = E.Department
+) AS MyTable --SUBQUERY THAT HAS BEEN ALIASED
+WHERE TheRank <= 5
+ORDER BY Department, EmployeeNumber
+

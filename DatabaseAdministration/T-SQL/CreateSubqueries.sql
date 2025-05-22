@@ -195,3 +195,38 @@ FROM (
 WHERE TheRank <= 5
 ORDER BY Department, EmployeeNumber
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--WITH STATEMENTS
+
+-- Top 5 employees by EmployeeNumber in each department
+--ADD WITH STATEMENT (makes code easier)
+WITH tblWithRanking AS (
+    SELECT D.Department, EmployeeNumber, EmployeeFirstName, EmployeeLastName,
+           RANK() OVER (PARTITION BY D.Department ORDER BY E.EmployeeNumber) AS TheRank
+    FROM tblDepartment AS D
+    JOIN tblEmployee AS E ON D.Department = E.Department
+)
+SELECT * 
+FROM tblWithRanking
+WHERE TheRank <= 5
+ORDER BY Department, EmployeeNumber;
+
+
+-- Top 5 employees and their transactions before 2015
+WITH tblWithRanking AS (
+    SELECT D.Department, EmployeeNumber, EmployeeFirstName, EmployeeLastName,
+           RANK() OVER (PARTITION BY D.Department ORDER BY E.EmployeeNumber) AS TheRank
+    FROM tblDepartment AS D
+    JOIN tblEmployee AS E ON D.Department = E.Department
+),
+Transaction2014 AS (
+    SELECT * FROM tblTransaction WHERE DateOfTransaction < '2015-01-01'
+)
+
+--EXECUTRE DUERY HERE:
+--SCOPE of one SELECT Statement
+SELECT * 
+FROM tblWithRanking  --LEFT JOIN TABLE
+LEFT JOIN Transaction2014 ON tblWithRanking.EmployeeNumber = Transaction2014.EmployeeNumber
+WHERE TheRank <= 5
+ORDER BY Department, tblWithRanking.EmployeeNumber;

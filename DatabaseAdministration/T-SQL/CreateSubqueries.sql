@@ -94,3 +94,34 @@ ORDER BY EmployeeNumber;
 -> ANY = anything up to 129
 -> ALL = anything up to 126
 							*/
+
+--THE FROM CLAUSE
+
+-- Subquery in FROM clause, filter employees first, then join
+--REPLACING employee table with subquery (that filters specific values)
+--Joining this output as a 'table' and Aliasing it AS E
+SELECT * 
+FROM tblTransaction AS T
+LEFT JOIN (	--Subquery limits rows to 4
+    SELECT * FROM tblEmployee
+    WHERE EmployeeLastName LIKE 'y%') AS E --ALIAS NB!
+ON E.EmployeeNumber = T.EmployeeNumber
+ORDER BY T.EmployeeNumber;
+
+
+-- Join all, then filter in WHERE (acts like INNER JOIN)
+SELECT * 
+FROM tblTransaction AS T
+LEFT JOIN tblEmployee AS E
+ON E.EmployeeNumber = T.EmployeeNumber
+WHERE E.EmployeeLastName LIKE 'y%'
+ORDER BY T.EmployeeNumber;
+
+
+-- Join with filter in ON clause (keeps LEFT JOIN behavior)
+SELECT * 
+FROM tblTransaction AS T
+LEFT JOIN tblEmployee AS E
+ON E.EmployeeNumber = T.EmployeeNumber
+AND E.EmployeeLastName LIKE 'y%'
+ORDER BY T.EmployeeNumber;

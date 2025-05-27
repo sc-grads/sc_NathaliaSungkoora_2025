@@ -1,0 +1,4 @@
+C:\SSIS\SSIS Part 1\SSIS Demos\Outputs\ImportColumnDemoFiles\ChrisGayle.jpg
+C:\SSIS\SSIS Part 1\SSIS Demos\Outputs\ImportColumnDemoFiles\McGregor.jpg
+C:\SSIS\SSIS Part 1\SSIS Demos\Outputs\ImportColumnDemoFiles\NateDiaz.jpg
+C:\SSIS\SSIS Part 1\SSIS Demos\Outputs\ImportColumnDemoFiles\NickDiaz.jpg

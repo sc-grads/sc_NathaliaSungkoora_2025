@@ -1,0 +1,83 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/28/2025 2:30:14 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-JUKB3QVS"
+  DTS:CreatorName="LAPTOP-JUKB3QVS\NathaliaSungkoora"
+  DTS:DTSID="{FE7B0C19-9FAD-4FF0-A8B4-29F1B1DEC14E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="7177"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{71218D8E-8006-4A77-8D87-A5CD4F5CED47}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-JUKB3QVS]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{ED69EE61-D648-45F4-BA00-EAD9AF771058}"
+      DTS:ObjectName="LAPTOP-JUKB3QVS">
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=LAPTOP-JUKB3QVS;UseWindowsAuthentication=True;UserName=;"
+          ConnectByProxy="False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-JUKB3QVS\NAMEDINSTANCE1]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{DC678BA3-3F3D-4F07-9E06-4EBDFADDE746}"
+      DTS:ObjectName="LAPTOP-JUKB3QVS\NAMEDINSTANCE1">
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=LAPTOP-JUKB3QVS\NAMEDINSTANCE1;UseWindowsAuthentication=True;UserName=;"
+          ConnectByProxy="False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Transfer Logins Task"
+      DTS:CreationName="Microsoft.TransferLoginsTask"
+      DTS:Description="Transfer Logins Task"
+      DTS:DTSID="{47D6F9E6-8C5B-4D77-BA02-2BC602940C20}"
+      DTS:ExecutableType="Microsoft.TransferLoginsTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transfer Logins Task"
+      DTS:TaskContact="Transfer Error Messages Task; Microsoft Corporation; SQL Server 2022; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <TransferLoginsTaskData
+          LoginList="1,9,Auto_user,"
+          SourceConnection="{ED69EE61-D648-45F4-BA00-EAD9AF771058}"
+          DestinationConnection="{DC678BA3-3F3D-4F07-9E06-4EBDFADDE746}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="176,41.6"
+          Id="Package\Transfer Logins Task"
+          TopLeft="289.166650867297,258.266664870713" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

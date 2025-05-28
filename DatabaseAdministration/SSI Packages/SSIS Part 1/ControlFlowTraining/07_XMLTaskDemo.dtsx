@@ -1,0 +1,254 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/28/2025 9:37:50 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-JUKB3QVS"
+  DTS:CreatorName="LAPTOP-JUKB3QVS\NathaliaSungkoora"
+  DTS:DTSID="{294B8A9D-F82C-4AC8-817D-EB8BCD1F4653}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="7177"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{F32F1069-F1D4-41D7-A4CA-8A1BC1835604}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Inventory.xml]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{86B267F9-424C-4EBC-AC77-1C3D95C0E841}"
+      DTS:ObjectName="Inventory.xml">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\SSIS\SSIS Part 1\SSIS Demos\SSIS DemoFIles\Inventory.xml" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[m1.xml]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{CD4FEF24-62D5-4C6F-8E96-A8A927EA844A}"
+      DTS:ObjectName="m1.xml">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\SSIS\SSIS Part 1\SSIS Demos\Outputs\m1.xml" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[m1.xml 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{97D8C080-75A4-4C9A-A632-35865081961C}"
+      DTS:ObjectName="m1.xml 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\SSIS\SSIS Part 1\SSIS Demos\SSIS DemoFIles\m1.xml" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[m2.xml]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{1F2BB7FA-F5A9-4E62-AEE6-8606017A6CDD}"
+      DTS:ObjectName="m2.xml">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\SSIS\SSIS Part 1\SSIS Demos\SSIS DemoFIles\m2.xml" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[m3.xml]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{57089892-2A71-44C9-B4AA-E4F9B285479F}"
+      DTS:ObjectName="m3.xml">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\SSIS\SSIS Part 1\SSIS Demos\Outputs\m3.xml" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[m3.xml 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{39648369-C0D2-402A-BB30-92EB4BD85B67}"
+      DTS:ObjectName="m3.xml 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\SSIS\SSIS Part 1\SSIS Demos\Outputs\m3.xml" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[NodesOutput.txt]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{02487047-F8E5-4F74-82FD-FAA383DCEFA9}"
+      DTS:ObjectName="NodesOutput.txt">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\SSIS\SSIS Part 1\SSIS Demos\Outputs\NodesOutput.txt" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SumOfBooksPrices.txt]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{B231160D-365C-47A5-95BD-F22915D01E2B}"
+      DTS:ObjectName="SumOfBooksPrices.txt">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\SSIS\SSIS Part 1\SSIS Demos\Outputs\SumOfBooksPrices.txt" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ValuesDemo.txt]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{7DDAC3C8-2122-4A05-8CE2-C411BAEAA822}"
+      DTS:ObjectName="ValuesDemo.txt">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\SSIS\SSIS Part 1\SSIS Demos\Outputs\ValuesDemo.txt" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ValuesDemo.txt 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{AA72AC2C-FA0D-40EA-8AB2-B9F36709BB4B}"
+      DTS:ObjectName="ValuesDemo.txt 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\SSIS\SSIS Part 1\SSIS Demos\Outputs\ValuesDemo.txt" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\XML MERGE"
+      DTS:CreationName="Microsoft.XMLTask"
+      DTS:Description="XML Task"
+      DTS:DTSID="{06F87E51-3831-4745-B769-858751A0CABD}"
+      DTS:ExecutableType="Microsoft.XMLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="XML MERGE"
+      DTS:TaskContact="XML Task; Microsoft Corporation; SQL Server 2022; � 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <XMLTaskData
+          OperationType="Merge"
+          Source="m1.xml 1"
+          SecondOperandType="FileConnection"
+          SecondOperand="m2.xml"
+          SaveOperationResult="True"
+          Destination="m3.xml 1"
+          OverwriteDestination="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\XPATH  Evaluation"
+      DTS:CreationName="Microsoft.XMLTask"
+      DTS:Description="XML Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{964A7D02-B3D7-4B07-9D71-8F4F5F962FF2}"
+      DTS:ExecutableType="Microsoft.XMLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="XPATH  Evaluation"
+      DTS:TaskContact="XML Task; Microsoft Corporation; SQL Server 2022; � 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <XMLTaskData
+          OperationType="XPATH"
+          Source="Inventory.xml"
+          SecondOperand="sum(/bookstore/book/price)"
+          SaveOperationResult="True"
+          Destination="SumOfBooksPrices.txt"
+          OverwriteDestination="True"
+          PutResultInOneNode="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\XPATH Node list"
+      DTS:CreationName="Microsoft.XMLTask"
+      DTS:Description="XML Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{D8F0E6AA-B5CE-4B57-B7CD-D41195FD04C3}"
+      DTS:ExecutableType="Microsoft.XMLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="XPATH Node list"
+      DTS:TaskContact="XML Task; Microsoft Corporation; SQL Server 2022; � 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <XMLTaskData
+          OperationType="XPATH"
+          Source="Inventory.xml"
+          SecondOperand="/bookstore/book/author/first-name"
+          SaveOperationResult="True"
+          Destination="NodesOutput.txt"
+          OverwriteDestination="True"
+          XPathOperation="NodeList"
+          PutResultInOneNode="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\XPATH Values"
+      DTS:CreationName="Microsoft.XMLTask"
+      DTS:Description="XML Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{C8E010D5-F92F-4FAF-A0BA-0B32C72FE621}"
+      DTS:ExecutableType="Microsoft.XMLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="XPATH Values"
+      DTS:TaskContact="XML Task; Microsoft Corporation; SQL Server 2022; � 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <XMLTaskData
+          OperationType="XPATH"
+          Source="Inventory.xml"
+          SecondOperand="//author[first-name=&quot;Toni&quot; and last-name=&quot;Bob&quot;]"
+          SaveOperationResult="True"
+          Destination="ValuesDemo.txt 1"
+          OverwriteDestination="True"
+          XPathOperation="Values"
+          PutResultInOneNode="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\XPATH  Evaluation"
+          TopLeft="46.6666641169125,46.7999996745586" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\XPATH Node list"
+          TopLeft="50.8333305559224,131.733332417276" />
+        <NodeLayout
+          Size="148,41.6"
+          Id="Package\XPATH Values"
+          TopLeft="60.8333300095466,212.333331856794" />
+        <NodeLayout
+          Size="140.8,41.6"
+          Id="Package\XML MERGE"
+          TopLeft="66.6666630241608,293.799997956952" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

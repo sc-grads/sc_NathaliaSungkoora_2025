@@ -1,0 +1,93 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/29/2025 3:42:38 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-JUKB3QVS"
+  DTS:CreatorName="LAPTOP-JUKB3QVS\NathaliaSungkoora"
+  DTS:DTSID="{4977F694-3C5E-46E5-9C83-F6A80829F2A0}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="7177"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{4FAA504D-0362-4189-A7A1-6F1B717FE04A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SomeCN]"
+      DTS:CreationName="ADO.NET:SQL"
+      DTS:DTSID="{D27F1FF1-0C92-457F-B719-4E574E3A9D9A}"
+      DTS:ObjectName="SomeCN">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Integrated Security=SSPI;Connect Timeout=30;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Rebuild Index Task"
+      DTS:CreationName="Microsoft.DbMaintenanceReindexTask"
+      DTS:Description="Rebuild Index Task"
+      DTS:DTSID="{960C1BAE-BECB-4D20-B23E-8EFBBB8F9125}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceReindexTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Rebuild Index Task"
+      DTS:TaskContact="Rebuild Index Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D27F1FF1-0C92-457F-B719-4E574E3A9D9A}"
+          SQLTask:DatabaseSelectionType="4"
+          SQLTask:TableSelectionType="2"
+          SQLTask:ObjectType="0"
+          SQLTask:ServerVersion="16"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False"
+          SQLTask:UseOriginalAmount="True"
+          SQLTask:Percentage="20"
+          SQLTask:Sort="False"
+          SQLTask:KeepOnline="False"
+          SQLTask:SkipUnsupported="False"
+          SQLTask:PadIndex="True"
+          SQLTask:MaximumDegreeOfParallelismUsed="False"
+          SQLTask:LowPriorityUsed="False"
+          SQLTask:CheckFragmentationPercentUsed="False"
+          SQLTask:CheckPageCountUsed="False"
+          SQLTask:CheckLastUsageInDaysUsed="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:SelectedDatabases
+            SQLTask:DatabaseName="AdventureWorks2014" />
+          <SQLTask:SelectedTables
+            SQLTask:TableName="Production.Product" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Rebuild Index Task"
+          TopLeft="294.999983881911,215.799998499354" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

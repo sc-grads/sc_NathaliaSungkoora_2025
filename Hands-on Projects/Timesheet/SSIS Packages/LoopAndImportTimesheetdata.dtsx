@@ -11,8 +11,8 @@
   DTS:LocaleID="7177"
   DTS:ObjectName="LoopAndImportTimesheetdata"
   DTS:PackageType="5"
-  DTS:VersionBuild="22"
-  DTS:VersionGUID="{D48D300B-0446-4379-8F3F-E9522D8C8A2F}">
+  DTS:VersionBuild="41"
+  DTS:VersionGUID="{66A60E02-EC92-46E1-82BE-2342AC61F8F2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -68,12 +68,31 @@
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{6137A5FB-7F28-4A01-9998-C71D6E70FFF0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EmployeeName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{0F015F9A-66D9-442D-B0C4-302E5BEFCB3C}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="ExcelFIle">
       <DTS:VariableValue
         DTS:DataType="8">C:\Users\NathaliaSungkoora\OneDrive - Northern Data (Pty) Ltd\Documents\Timesheets\Nathalia Sungkoora\Nathalia Sungkoora_Time sheet_Mar FINAL.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AABD105A-46F6-434B-BE1E-3E6C3D8D94AA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RootFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\NathaliaSungkoora\OneDrive - Northern Data (Pty) Ltd\Documents\Timesheets</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -1049,6 +1068,49 @@
                     <input
                       refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Inputs[Data Conversion Input]"
                       name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Inputs[Data Conversion Input].Columns[D of Week]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="D of Week"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[D of Week]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Inputs[Data Conversion Input].Columns[Client]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Client"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Client]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Inputs[Data Conversion Input].Columns[Client Project Name]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Client Project Name"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Client Project Name]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Inputs[Data Conversion Input].Columns[Description]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Description"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Description]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Inputs[Data Conversion Input].Columns[Billable or Non Billable]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Billable or Non Billable"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Billable or Non Billable]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Inputs[Data Conversion Input].Columns[Comments]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Comments"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Comments]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Inputs[Data Conversion Input].Columns[Total Hours]"
+                          cachedDataType="date"
+                          cachedName="Total Hours"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Total Hours]" />
+                      </inputColumns>
                       <externalMetadataColumns />
                     </input>
                   </inputs>
@@ -1058,6 +1120,162 @@
                       exclusionGroup="1"
                       name="Data Conversion Output"
                       synchronousInputId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[D of Week_conv]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[D of Week_conv]"
+                          name="D of Week_conv"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[D of Week]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Client_conv]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Client_conv]"
+                          name="Client_conv"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Client]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Client Project Name_conv]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Client Project Name_conv]"
+                          name="Client Project Name_conv"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Client Project Name]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Description_conv]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Description_conv]"
+                          name="Description_conv"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Description]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Billable or Non Billable_conv]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Billable or Non Billable_conv]"
+                          name="Billable or Non Billable_conv"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Billable or Non Billable]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Comments_conv]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Comments_conv]"
+                          name="Comments_conv"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Comments]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Total Hours_conv]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Total Hours_conv]"
+                          name="Total Hours_conv"
+                          precision="5"
+                          scale="2"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Total Hours]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
                       <externalMetadataColumns />
                     </output>
                     <output
@@ -1077,6 +1295,193 @@
                           refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                           dataType="i4"
                           lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Inputs[Derived Column Input].Columns[Total Hours]"
+                          cachedDataType="date"
+                          cachedName="Total Hours"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Total Hours]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Inputs[Derived Column Input].Columns[Date]"
+                          cachedDataType="date"
+                          cachedName="Date"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Date]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Inputs[Derived Column Input].Columns[Start Time]"
+                          cachedDataType="date"
+                          cachedName="Start Time"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Start Time]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Inputs[Derived Column Input].Columns[End Time]"
+                          cachedDataType="date"
+                          cachedName="End Time"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[End Time]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[FullName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="100"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[FullName]"
+                          name="FullName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,100,1252)[UPPER]([TRIM](@[User::EmployeeName]))</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,100,1252)UPPER(TRIM(@[User::EmployeeName]))</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[TotalHours]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[TotalHours]"
+                          name="TotalHours"
+                          precision="5"
+                          scale="2"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_NUMERIC,5,2)#{Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Total Hours]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_NUMERIC,5,2)[Total Hours]</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[Date_conv]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[Date_conv]"
+                          name="Date_conv"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_DBDATE)#{Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Date]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DBDATE)Date</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[StartTime]"
+                          dataType="dbTime"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[StartTime]"
+                          name="StartTime"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_DBTIME)#{Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[Start Time]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DBTIME)[Start Time]</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[EndTime]"
+                          dataType="dbTime"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[EndTime]"
+                          name="EndTime"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_DBTIME)#{Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output].Columns[End Time]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DBTIME)[End Time]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -1378,7 +1783,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset"></property>
+                      name="OpenRowset">[dbo].[Timesheet]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1400,7 +1805,7 @@
                       dataType="System.Int32"
                       description="Specifies the mode used to access the database."
                       name="AccessMode"
-                      typeConverter="AccessMode">0</property>
+                      typeConverter="AccessMode">3</property>
                     <property
                       dataType="System.Boolean"
                       description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
@@ -1412,7 +1817,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                      name="FastLoadOptions"></property>
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
@@ -1421,6 +1826,8 @@
                   <connections>
                     <connection
                       refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[LAPTOP-JUKB3QVS.TimesheetDB]"
+                      connectionManagerRefId="Package.ConnectionManagers[LAPTOP-JUKB3QVS.TimesheetDB]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -1431,8 +1838,160 @@
                       errorRowDisposition="FailComponent"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FullName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="FullName"
+                          externalMetadataColumnId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[FullName]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[D of Week_conv]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="D of Week_conv"
+                          externalMetadataColumnId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayOfWeek]"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[D of Week_conv]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Client_conv]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="Client_conv"
+                          externalMetadataColumnId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Client]"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Client_conv]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Client Project Name_conv]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="Client Project Name_conv"
+                          externalMetadataColumnId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClientProjectName]"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Client Project Name_conv]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Description_conv]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="Description_conv"
+                          externalMetadataColumnId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Description_conv]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Billable or Non Billable_conv]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="Billable or Non Billable_conv"
+                          externalMetadataColumnId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Billable]"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Billable or Non Billable_conv]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Comments_conv]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="Comments_conv"
+                          externalMetadataColumnId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output].Columns[Comments_conv]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TotalHours]"
+                          cachedDataType="numeric"
+                          cachedName="TotalHours"
+                          cachedPrecision="5"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalHours]"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[TotalHours]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Date_conv]"
+                          cachedDataType="dbDate"
+                          cachedName="Date_conv"
+                          externalMetadataColumnId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[Date_conv]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StartTime]"
+                          cachedDataType="dbTime"
+                          cachedName="StartTime"
+                          externalMetadataColumnId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartTime]"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[StartTime]" />
+                        <inputColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EndTime]"
+                          cachedDataType="dbTime"
+                          cachedName="EndTime"
+                          externalMetadataColumnId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EndTime]"
+                          lineageId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output].Columns[EndTime]" />
+                      </inputColumns>
                       <externalMetadataColumns
-                        isUsed="True" />
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TimesheetID]"
+                          dataType="i4"
+                          name="TimesheetID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="FullName" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                          dataType="wstr"
+                          length="10"
+                          name="Date" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayOfWeek]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="DayOfWeek" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Client]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="Client" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClientProjectName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="ClientProjectName" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="Description" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Billable]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="Billable" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="Comments" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalHours]"
+                          dataType="numeric"
+                          name="TotalHours"
+                          precision="5"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartTime]"
+                          dataType="wstr"
+                          length="16"
+                          name="StartTime" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EndTime]"
+                          dataType="wstr"
+                          length="16"
+                          name="EndTime" />
+                      </externalMetadataColumns>
                     </input>
                   </inputs>
                   <outputs>
@@ -1468,8 +2027,13 @@
                   name="Data Conversion Output"
                   startId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Loop Through All folders And Files\Importing Timesheet Data.Paths[Excel Source Output]"
+                  refId="Package\Loop Through All folders And Files\Importing Timesheet Data.Paths[Derived Column Output]"
                   endId="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Derived Column Output"
+                  startId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Loop Through All folders And Files\Importing Timesheet Data.Paths[Excel Source Output]"
+                  endId="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column.Inputs[Derived Column Input]"
                   name="Excel Source Output"
                   startId="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source.Outputs[Excel Source Output]" />
               </paths>
@@ -1493,36 +2057,6 @@
               VSTAMinorVersion="0"
               Language="CSharp"
               ReadOnlyVariables="User::varFileName">
-              <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_32e69335f9d8447289fe671b91aa82db")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("HP")]
-[assembly: AssemblyProduct("ST_32e69335f9d8447289fe671b91aa82db")]
-[assembly: AssemblyCopyright("Copyright @ HP 2025")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1642,6 +2176,35 @@ using System.Runtime.CompilerServices;
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 </root>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_32e69335f9d8447289fe671b91aa82db.Properties.Settings.get_Default():ST_32e69335f9d8447289fe671b91aa82db.Properties.Sett" +
+    "ings")]
+
+namespace ST_32e69335f9d8447289fe671b91aa82db.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
               <ProjectItem
                 Name="ScriptMain.cs"
                 Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
@@ -1869,34 +2432,35 @@ namespace ST_32e69335f9d8447289fe671b91aa82db
   </msb:ItemGroup>
 </c:Project>]]></ProjectItem>
               <ProjectItem
-                Name="Properties\Settings.Designer.cs"
-                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_32e69335f9d8447289fe671b91aa82db")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("HP")]
+[assembly: AssemblyProduct("ST_32e69335f9d8447289fe671b91aa82db")]
+[assembly: AssemblyCopyright("Copyright @ HP 2025")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
 
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_32e69335f9d8447289fe671b91aa82db.Properties.Settings.get_Default():ST_32e69335f9d8447289fe671b91aa82db.Properties.Sett" +
-    "ings")]
-
-namespace ST_32e69335f9d8447289fe671b91aa82db.Properties {
-    
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-        
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Settings.settings"
                 Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
@@ -2119,13 +2683,17 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="130.4,41.6"
-          Id="Package\Loop Through All folders And Files\Script Task"
-          TopLeft="90.4666458133203,16.7666665883196" />
+          Size="184,41.6"
+          Id="Package\Import Timesheet Data"
+          TopLeft="5.06667067342315,11.06666667872" />
         <NodeLayout
           Size="197.6,41.6"
           Id="Package\Loop Through All folders And Files\Importing Timesheet Data"
           TopLeft="54.1999806036562,96.7333313867119" />
+        <NodeLayout
+          Size="130.4,41.6"
+          Id="Package\Loop Through All folders And Files\Script Task"
+          TopLeft="90.4666458133203,16.7666665883196" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
@@ -2133,10 +2701,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           Size="307.2,264.8"
           Id="Package\Loop Through All folders And Files"
           TopLeft="300.833316896525,140.399999023676" />
-        <NodeLayout
-          Size="184,41.6"
-          Id="Package\Import Timesheet Data"
-          TopLeft="5.06667067342315,11.06666667872" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -2212,66 +2776,111 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     design-time-name="Package\Loop Through All folders And Files\Importing Timesheet Data">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination"
+          TopLeft="93.3333282338251,293.799997956952" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion"
+          TopLeft="100.833327824043,217.533331820634" />
         <NodeLayout
           Size="140,41.6"
           Id="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source"
           TopLeft="100.833327824043,56.3333329415984" />
         <NodeLayout
-          Size="156,41.6"
-          Id="Package\Loop Through All folders And Files\Importing Timesheet Data\Data Conversion"
-          TopLeft="94.9999948094291,142.133332344956" />
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination"
-          TopLeft="85.833328643607,223.599998445114" />
+          Size="152.8,41.6"
+          Id="Package\Loop Through All folders And Files\Importing Timesheet Data\Derived Column"
+          TopLeft="99.999994536241,140.399999023676" />
         <EdgeLayout
           Id="Package\Loop Through All folders And Files\Importing Timesheet Data.Paths[Excel Source Output]"
-          TopLeft="171.916661316736,97.9333329415984">
+          TopLeft="173.616661180142,97.9333329415984">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,44.1999994033575"
+              EndConnector="0,42.4666660820775"
               Start="0,0"
-              End="0,36.6999994033575">
+              End="0,34.9666660820775">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.6999994033575" />
+                    End="0,34.9666660820775" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-8,9.48333304103875,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Loop Through All folders And Files\Importing Timesheet Data.Paths[Derived Column Output]"
+          TopLeft="177.616661180142,181.999999023676">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.5333327969579"
+              Start="0,0"
+              End="0,28.0333327969579">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.0333327969579" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,6.01666639847893,16,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Loop Through All folders And Files\Importing Timesheet Data.Paths[Data Conversion Output]"
-          TopLeft="172.216661726518,183.733332344956">
+          TopLeft="178.883328028934,259.133331820634">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,39.8666661001577"
+              EndConnector="0,34.6666661363182"
               Start="0,0"
-              End="0,32.3666661001577">
+              End="0,27.1666661363182">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.3666661001577" />
+                    End="0,27.1666661363182" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-8,5.58333306815911,16,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Loop Through All folders And Files\Importing Timesheet Data\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Loop Through All folders And Files\Importing Timesheet Data\Excel Source">
     <Properties>

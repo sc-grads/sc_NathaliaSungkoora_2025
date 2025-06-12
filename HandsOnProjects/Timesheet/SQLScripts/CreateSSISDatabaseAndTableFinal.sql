@@ -132,11 +132,9 @@ GO
 CREATE TABLE dbo.AuditLog (
     AuditID INT IDENTITY(1,1) PRIMARY KEY,
     PackageName VARCHAR(255),
-    UserName VARCHAR(255),
-    MachineName VARCHAR(255),
     TaskName VARCHAR(255),
     OperationType VARCHAR(255), -- Insert/Update/Delete
-    TableName VARCHAR(255),
+    EntityType VARCHAR(255),
     [RowCount] INT,
     AuditTime DATETIME DEFAULT GETDATE(),
     FileProcessed VARCHAR(500),

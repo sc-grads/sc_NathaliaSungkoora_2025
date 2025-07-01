@@ -3,3 +3,10 @@ node_modules
 .vs/
 bin/
 obj/
+
+.venv
+.vscode
+__pycache__
+data.db
+*.pyc
+.DS_Store

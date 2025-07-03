@@ -91,6 +91,7 @@ years ago would be in the same stage of life as {name}.""")
 # Output: Otto Matic's dog age is 7.142857...
 
 # --------------------------------
+#EXAM PRCTICE: VARIABLES
 
 # Create a variable called 'my_name' and assign it the value of your name as a string.
 # Then print out a greeting using the variable, like "Hello, Andrew!"

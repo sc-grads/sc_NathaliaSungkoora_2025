@@ -1,0 +1,19 @@
+// Users table
+Table users {
+  id int [pk, increment]
+  username varchar
+}
+
+// Comments table
+Table comments {
+  id int [pk, increment]
+  contents varchar
+  user_id int [ref: > users.id]
+  post_id int [ref: > posts.id]
+}
+
+// Posts table
+Table posts {
+  id int [pk, increment]
+  title varchar
+}

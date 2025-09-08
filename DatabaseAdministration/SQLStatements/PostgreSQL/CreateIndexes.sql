@@ -84,4 +84,56 @@ FROM PG_CLASS
 WHERE relkind = 'i'; 
 
 
+------------------------------------------------------------------------------
+--Using my INDEX
+
+SELECT *
+FROM likes
+WHERE created_at <'2013-01-01';
+
+
+SELECT COUNT(*)
+FROM likes
+WHERE created_at <'2013-01-01'; --63055
+
+--ADDING EXPLAIN
+EXPLAIN
+SELECT *
+FROM likes
+WHERE created_at <'2013-01-01'; --
+--"Seq Scan on likes  (cost=0.00..14248.11 rows=64220 width=24)"
+--"Filter: (created_at < '2013-01-01 00:00:00+02'::timestamp with time zone)"
+
+--CREATE INDEX ON created_at to SPEED UP QUERY:
+CREATE INDEX likes_created_at_idx 
+ON likes(created_at);
+
+--RERUN ORGINAL QUERY:
+EXPLAIN
+SELECT *
+FROM likes
+WHERE created_at <'2013-01-01'; 
+-- ADDS an INDEX CHECK
+
+--TRY GREATER THAN QUERY:
+
+SELECT COUNT(*)
+FROM likes
+WHERE created_at >'2013-01-01';  --688954
+
+--CHECK HOW QUERY IS GETTING EXECUTED:
+EXPLAIN
+SELECT *
+FROM likes
+WHERE created_at >'2013-01-01';
+--LOOKS AT EACH FILE SCANNED SEQUENTIALLY ->SAVES TIME NOT USING THE INDEX
+--"Seq Scan on likes  (cost=0.00..14248.11 rows=687788 width=24)"
+--"Filter: (created_at > '2013-01-01 00:00:00+02'::timestamp with time zone)"
+
+
+
+
+
+
+
 

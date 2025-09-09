@@ -1,0 +1,17 @@
+{
+  "name": "ig",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "node-pg-migrate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "node-pg-migrate": "^8.0.3",
+    "pg": "^8.16.3"
+  }
+}

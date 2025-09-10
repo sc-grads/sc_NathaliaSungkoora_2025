@@ -15,24 +15,51 @@ class UserRepo {
     return toCamelCase(rows);
   }
 
-  // A method to find a user by their ID (not implemented yet)
+  // A method to find a user by their ID )
   static async findById(id) {
-    //WARNING: REALLY BIG SECURITY ISSUE HERE!
+
     const { rows } = await pool.query(`
-        SELECT * FROM users WHERE id = ${id};
-    `);
+        SELECT * FROM users WHERE id = $1;`, [id]
+    );
     return toCamelCase(rows)[0];
+  } 
+
+  // A method to add a new user to the database 
+    static async insert(username, bio) {
+      const {
+        rows,
+      } = await pool.query(
+        'INSERT INTO users (username, bio) VALUES ($1, $2) RETURNING *;',
+        [username, bio]
+      );
+  
+      return toCamelCase(rows)[0];
+    }
+
+  // A method to update an existing user in the database 
+    static async update(id, username, bio) {
+      const {
+        rows,
+      } = await pool.query(
+        'UPDATE users SET username = $1, bio = $2 WHERE id = $3 RETURNING *;',
+        [username, bio, id]
+      );
+  
+      return toCamelCase(rows)[0];
+    }
+
+  // A method to delete a user from the database
+    static async delete(id) {
+      const {
+        rows,
+      } = await pool.query('DELETE FROM users WHERE id = $1 RETURNING *;', [id]);
+  
+      return toCamelCase(rows)[0];
+    }
   }
 
-  // A method to add a new user to the database (not implemented yet)
-  static async insert() {}
-
-  // A method to update an existing user in the database (not implemented yet)
-  static async update() {}
-
-  // A method to delete a user from the database (not implemented yet)
-  static async delete() {}
-}
+    
+ 
 
 // Export the UserRepo class so it can be used in other parts of the application
 module.exports = UserRepo;

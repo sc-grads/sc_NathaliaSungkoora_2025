@@ -22,7 +22,7 @@ class UserRepo {
         SELECT * FROM users WHERE id = ${id};
     `);
     return toCamelCase(rows)[0];
-  }
+  } 
 
   // A method to add a new user to the database (not implemented yet)
   static async insert() {}

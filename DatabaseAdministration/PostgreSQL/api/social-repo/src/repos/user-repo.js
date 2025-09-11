@@ -56,9 +56,15 @@ class UserRepo {
   
       return toCamelCase(rows)[0];
     }
-  }
-
+  
+// A method to count the total number of users in the database
+    static async count() {
+        const { rows } = await pool.query('SELECT COUNT(*) FROM users;');
     
+        return parseInt(rows[0].count);
+      }
+    }
+      
  
 
 // Export the UserRepo class so it can be used in other parts of the application
